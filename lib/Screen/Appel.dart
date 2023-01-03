@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
 
 class Appel extends StatelessWidget {
   const Appel({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class Appel extends StatelessWidget {
             return IconButton(
               icon: const Icon(CupertinoIcons.back,
                 size: 35,),
-              onPressed: () { Scaffold.of(context).openDrawer(); },
+              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil())); },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
           },

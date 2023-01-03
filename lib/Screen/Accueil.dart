@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
+import 'package:urgence_projet/Screen/ContactUrgent.dart';
 
 class Accueil extends StatelessWidget {
    Accueil({Key? key}) : super(key: key);
@@ -106,7 +107,7 @@ class Accueil extends StatelessWidget {
 
                             child: InkWell(
                               onTap: (){
-                                print('taped');
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>ContactUrgent()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(

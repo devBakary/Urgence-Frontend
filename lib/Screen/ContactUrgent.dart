@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
 
 class ContactUrgent extends StatefulWidget {
   const ContactUrgent({Key? key}) : super(key: key);
@@ -19,14 +20,14 @@ class _ContactUrgentState extends State<ContactUrgent> {
             return IconButton(
               icon: const Icon(CupertinoIcons.back,
                 size: 35,),
-              onPressed: () { Scaffold.of(context).openDrawer(); },
+              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil())); },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
           },
         ),
 
 
-        title: const Text("Ma fiche",
+        title: const Text("Contact d'Urgence",
           style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -39,36 +40,50 @@ class _ContactUrgentState extends State<ContactUrgent> {
         padding: EdgeInsets.only(right: 10, left: 10),
         child: Column(
           children: [
-            //pour la barre de recherche
+            //pour le texte info
             Padding(
-              padding: EdgeInsets.only( top: 30),
+              padding: const EdgeInsets.only( top: 30),
               child: Container(
-                height: MediaQuery.of(context).size.height * .08,
-                decoration: BoxDecoration(
-                  color: Colors.amberAccent,
-                  borderRadius: BorderRadius.circular(8),
+                padding: const EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height * .14,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFDEE3E8),
+                ),
+                child: const Center(
+                  child: Text("Ajouter des numéros d’urgence pour les appeler ou partager votre position à tout moment!",
+                          style: TextStyle(fontSize: 20,),),
                 ),
               ),
             ),
-            //pour le box contenant le text
+
+            //pour le box contenant le text et l'icon
             Padding(
-              padding: EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15),
               child: Container(
                 height: MediaQuery.of(context).size.height * .12,
-                decoration: BoxDecoration(
-                  color: Colors.amberAccent,
-                  borderRadius: BorderRadius.circular(8),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFDEE3E8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(CupertinoIcons.person_crop_circle_badge_plus, size: 80,  color: Color(0xFF666666),),
+
+                    SizedBox(width: MediaQuery.of(context).size.width * .03,),
+                    
+                    const Text('Ajouter Contact', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,),)
+                  ],
                 ),
               ),
             ),
             //fin _______________________________________________ _____________
 
-            //pour ajpouter le bouton
+            //pour ajouter le bouton
             Container(
               child: Center(
                 child: ElevatedButton(
                   onPressed: (){},
-                  child: Text("Ajouter"),
+                  child: const Text("Ajouter"),
                   style: ElevatedButton.styleFrom(
                       minimumSize: Size(200, 40)
                   ),
