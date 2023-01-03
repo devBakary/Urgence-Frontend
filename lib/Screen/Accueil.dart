@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
+import 'package:urgence_projet/Screen/PageAide.dart';
 
 class Accueil extends StatelessWidget {
    Accueil({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class Accueil extends StatelessWidget {
 
 
                       child: GridView(
-                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10),
@@ -159,7 +160,7 @@ class Accueil extends StatelessWidget {
 
                             child: InkWell(
                               onTap: (){
-                                print('taped');
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Aide()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
