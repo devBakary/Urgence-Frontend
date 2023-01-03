@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/About.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
@@ -7,17 +8,18 @@ import 'package:urgence_projet/Screen/PageAide.dart';
 class Accueil extends StatelessWidget {
    Accueil({Key? key}) : super(key: key);
 
-  List<String> images = [
-        "assets/images/urgSplash.jpg"
-        "assets/images/urgSplash.jpg"
-        "assets/images/urgSplash.jpg"
-        "assets/images/urgSplash.jpg"
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+
+          leading: Builder(
+            builder: (BuildContext context) {
+              return Container();
+
+            },
+          ),
 
           title: const Text("URGENCE MALI",
             style: TextStyle(fontSize: 24,
@@ -78,7 +80,7 @@ class Accueil extends StatelessWidget {
                         children: [
                           //Appel d'urgence
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
 
                             child: InkWell(
                               onTap: (){
@@ -94,7 +96,7 @@ class Accueil extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Icon(Icons.call, size: 80, color: Colors.white,),
-                                    Text("Appel d'Urgence", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                    Text("Appel Urgence", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
                                   ],
                                 ),
                               ),
@@ -104,7 +106,7 @@ class Accueil extends StatelessWidget {
 
                           //mes contacts
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
 
                             child: InkWell(
                               onTap: (){
@@ -120,7 +122,7 @@ class Accueil extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Icon(CupertinoIcons.person_crop_circle, size: 80, color: Colors.white,),
-                                    Text("Mes Contacts", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                    Text("Mes Contacts", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
                                   ],
                                 ),
                               ),
@@ -130,7 +132,7 @@ class Accueil extends StatelessWidget {
 
                           //ma fiche
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
 
                             child: InkWell(
                               onTap: (){
@@ -146,7 +148,7 @@ class Accueil extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Icon(Icons.perm_contact_cal, size: 80, color: Colors.white,),
-                                    Text("Ma fiche", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                    Text("Ma fiche", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
                                   ],
                                 ),
                               ),
@@ -156,11 +158,11 @@ class Accueil extends StatelessWidget {
 
                           //apropos
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Aide()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Apropos()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -172,7 +174,7 @@ class Accueil extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Icon(CupertinoIcons.info_circle_fill, size: 80, color: Colors.white,),
-                                    Text("Apropos", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                    Text("Apropos", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
                                   ],
                                 ),
                               ),

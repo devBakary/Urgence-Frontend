@@ -66,7 +66,7 @@ class Appel extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * .02,
             ),
-            //les polices de secours
+            //les polices de secours==================================================
             Row(
               children: [
                 //l'icon
@@ -86,11 +86,12 @@ class Appel extends StatelessWidget {
 
                 SizedBox(width: MediaQuery.of(context).size.width * .01,),
 
+                // pour la police de secours =============================================
                 Container(
                   //padding: EdgeInsets.all(5),
+
                   child: Expanded(
                     child: Container(
-
                       height: 70,
                       alignment: AlignmentDirectional.bottomStart,
                       decoration: const BoxDecoration(
@@ -103,8 +104,10 @@ class Appel extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          const Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          SizedBox(width: MediaQuery.of(context).size.width * .13,),
+                          Container(
+
+                              child: const Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)),
+                          //SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
                           Expanded(
                             child: Row(
@@ -172,7 +175,7 @@ class Appel extends StatelessWidget {
                       child: Row(
                         children: [
                           const Text("Ambulance", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          SizedBox(width: MediaQuery.of(context).size.width * .13,),
+                          //SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
                           Expanded(
                             child: Row(
@@ -240,8 +243,8 @@ class Appel extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text("Pompier", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          SizedBox(width: MediaQuery.of(context).size.width * .13,),
+                          const Text("Pompier", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+
 
                           Expanded(
                             child: Row(
@@ -309,7 +312,6 @@ class Appel extends StatelessWidget {
                       child: Row(
                         children: [
                           const Text("Gendarmerie", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
                           Expanded(
                             child: Row(
@@ -376,7 +378,6 @@ class Appel extends StatelessWidget {
                       child: Row(
                         children: [
                           const Text("Protection Civile", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
                           Expanded(
                             child: Row(

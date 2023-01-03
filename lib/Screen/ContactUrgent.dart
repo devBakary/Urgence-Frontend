@@ -78,6 +78,7 @@ class _ContactUrgentState extends State<ContactUrgent> {
             ),
             //fin _______________________________________________ _____________
 
+            SizedBox(height: MediaQuery.of(context).size.height * .02,),
             //pour ajouter le bouton
             Container(
               child: Center(
