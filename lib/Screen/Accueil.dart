@@ -66,41 +66,117 @@ class Accueil extends StatelessWidget {
                       )
                     ),
 
-                    
+
                       child: GridView(
                         gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10),
                         children: [
+                          //Appel d'urgence
                           Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.red
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red
+                            padding: EdgeInsets.all(10),
+
+                            child: InkWell(
+                              onTap: (){
+                                print('taped');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFD42125),
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.call, size: 80, color: Colors.white,),
+                                    Text("Appel d'Urgence", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
 
-                        ]
+
+                          //mes contacts
+                          Container(
+                            padding: EdgeInsets.all(10),
+
+                            child: InkWell(
+                              onTap: (){
+                                print('taped');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFD42125),
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(CupertinoIcons.person_crop_circle, size: 80, color: Colors.white,),
+                                    Text("Mes Contacts", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+
+
+                          //ma fiche
+                          Container(
+                            padding: EdgeInsets.all(10),
+
+                            child: InkWell(
+                              onTap: (){
+                                print('taped');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF0054E0),
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.perm_contact_cal, size: 80, color: Colors.white,),
+                                    Text("Ma fiche", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+
+
+                          //apropos
+                          Container(
+                            padding: EdgeInsets.all(10),
+
+                            child: InkWell(
+                              onTap: (){
+                                print('taped');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF0054E0),
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(CupertinoIcons.info_circle_fill, size: 80, color: Colors.white,),
+                                    Text("Apropos", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+
                       ),
                   ),
                 ),
