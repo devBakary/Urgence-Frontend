@@ -15,7 +15,7 @@ class _MaFicheState extends State<MaFiche> {
     return Scaffold(
       appBar: AppBar(
           leading: Builder(
-          builder: (BuildContext context) {
+            builder: (BuildContext context) {
             return IconButton(
             icon: const Icon(CupertinoIcons.back,
             size: 35,),
@@ -38,7 +38,6 @@ class _MaFicheState extends State<MaFiche> {
           actions: <Widget>[
           // Premier bouton
           InkWell(
-
            child:  Container(
 
                padding: const EdgeInsets.only( top: 15, right: 20),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
+import 'package:urgence_projet/Screen/ContactAbout.dart';
 
 class ContactUrgent extends StatefulWidget {
   const ContactUrgent({Key? key}) : super(key: key);
@@ -104,43 +105,48 @@ class _ContactUrgentState extends State<ContactUrgent> {
                 Container(
                   //padding: EdgeInsets.all(5),
                   child: Expanded(
-                    child: Container(
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ContactAbout()));
+                      },
+                      child: Container(
 
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Expanded(
+                        height: 70,
+                        alignment: AlignmentDirectional.bottomStart,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Colors.red,
+                                    width: 2
+                                )
+                            )
+                        ),
+                        child: Expanded(
 
-                        child: Row(
+                          child: Row(
 
-                          children: [
-                            Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                            //SizedBox(width: MediaQuery.of(context).size.width * .13,),
+                            children: [
+                              Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                              //SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.call, color: Colors.red,),
-                                    onPressed: (){},
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.add_alert, color: Colors.red,),
-                                    onPressed: (){},
-                                  ),
-                                ],
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.call, color: Colors.red,),
+                                      onPressed: (){},
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.add_alert, color: Colors.red,),
+                                      onPressed: (){},
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
