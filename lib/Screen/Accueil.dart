@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
+import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 
 class Accueil extends StatelessWidget {
@@ -136,7 +137,7 @@ class Accueil extends StatelessWidget {
 
                             child: InkWell(
                               onTap: (){
-                                print('taped');
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MaFiche()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
