@@ -186,7 +186,7 @@ class Apropos extends StatelessWidget {
 
                   // premier box
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 50),
+                    margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * .07),
                     //height: MediaQuery.of(context).size.height * .20,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -200,7 +200,7 @@ class Apropos extends StatelessWidget {
                   //======fin=====================
 
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .05,
+                    height: MediaQuery.of(context).size.height * .01,
                   ),
 
                 Container(

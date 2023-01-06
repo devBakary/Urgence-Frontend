@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
+import 'package:urgence_projet/Screen/Connexion.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
+import 'package:urgence_projet/Screen/Inscription.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 
@@ -36,7 +38,9 @@ class Accueil extends StatelessWidget {
                 icon: Icon(Icons.menu),
                 iconSize: 35,
                 alignment: Alignment.center,
-                onPressed: (){ },
+                onPressed: (){
+                  showDialogWidget(context);
+                },
               )
             ),
 
@@ -192,6 +196,116 @@ class Accueil extends StatelessWidget {
     );
   }
 }
+
+
+
+
+showDialogWidget(BuildContext context){
+
+  showModalBottomSheet(context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(
+        top: Radius.circular(32),
+
+      )),
+
+      builder: (BuildContext context){
+      return
+
+        Container(
+        height: MediaQuery.of(context).size.height * 0.94,
+          child: Column(
+            children:  [
+               Center(
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * .02),
+                  height: 10,
+                  width: MediaQuery.of(context).size.width * .3,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.horizontal(
+                      left: Radius.circular(30),
+                      right: Radius.circular(30)
+                    )
+                  ),
+                )
+              ),
+
+              SizedBox(
+                  height: MediaQuery.of(context).size.height * .02
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Container(
+                      child: const Text("Activer l'option non voyant",
+                      style: TextStyle(
+                        fontSize:  24,
+                        fontWeight: FontWeight.bold
+                      ),
+                      ),
+                    ),
+
+                    Container(
+                      alignment: Alignment.topCenter,
+                      padding: EdgeInsets.only(bottom: 18),
+                      child: IconButton(
+                         // alignment: Alignment.,
+                          onPressed: (){},
+                          icon: const Icon(Icons.toggle_off_outlined, color: Colors.green, size: 50,)),
+                    )
+                  ],
+                ),
+              ),
+
+
+              SizedBox(
+                  height: MediaQuery.of(context).size.height * .009
+              ),
+
+              DefaultTabController(
+                  length: 2,
+                  child: Column(
+                        children:  [
+                          const TabBar(
+                            indicatorColor: Colors.red,
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              tabs: [
+                            Tab(
+                              icon: Icon(CupertinoIcons.home, color: Colors.red,),
+                            ),
+
+                            Tab(
+                              icon: Icon(CupertinoIcons.home, color: Colors.deepPurple,),
+                            ),
+                          ]),
+                            Container(
+                              width: double.maxFinite,
+                              height: MediaQuery.of(context).size.height * .6451,
+                              child: const TabBarView(
+
+                                  children: [
+
+                                    Connexion(),
+                                    Inscription(),
+
+                              ]),
+                            ),
+
+                        ],
+                      ),
+                  ),
+            ],
+          ),
+
+    );
+  }
+  );
+}
+
 
 
 

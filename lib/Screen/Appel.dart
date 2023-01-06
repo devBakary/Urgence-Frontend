@@ -10,18 +10,6 @@ class Appel extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
 
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(CupertinoIcons.back,
-                size: 35,),
-              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil())); },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-
-
         title: const Text("Appel d'Urgence",
           style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -66,343 +54,366 @@ class Appel extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * .02,
             ),
-            //les polices de secours==================================================
-            Row(
-              children: [
-                //l'icon
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20, left: 10),
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.red
-                    ) ,
 
-                  ),
-                ),
+          Expanded(
+              child: Flexible(
+                child: ListView(
 
-                SizedBox(width: MediaQuery.of(context).size.width * .01,),
+                  children: [
 
-                // pour la police de secours =============================================
-                Container(
-                  //padding: EdgeInsets.all(5),
 
-                  child: Expanded(
-                    child: Container(
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
 
-                              child: const Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)),
-                          //SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.call, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add_alert, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                              ],
+                    //les polices de secours==================================================
+                    Row(
+                      children: [
+                        //l'icon
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            padding: EdgeInsets.only(top: 20, left: 10),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.red
+                            ) ,
+
+                          ),
+                        ),
+
+                        SizedBox(width: MediaQuery.of(context).size.width * .01,),
+
+                        // pour la police de secours =============================================
+                        Container(
+                          //padding: EdgeInsets.all(5),
+
+                          child: Expanded(
+                            child: Container(
+                              height: 70,
+                              alignment: AlignmentDirectional.bottomStart,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.red,
+                                          width: 2
+                                      )
+                                  )
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+
+                                      child: const Text("Police de secours", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)),
+                                  //SizedBox(width: MediaQuery.of(context).size.width * .13,),
+
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.call, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.add_alert, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+
+
+                      ],
                     ),
-                  ),
-                ),
 
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .02,
+                    ),
+                    //les Ambulances__________________________________________________________________
+                    Row(
+                      children: [
+                        //l'icon
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            //padding: EdgeInsets.only(top: 20, left: 10),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.blue
+                            ) ,
+                            child: Icon(Icons.emergency, color: Colors.white, size: 40,),
+                          ),
+                        ),
 
-              ],
-            ),
+                        SizedBox(width: MediaQuery.of(context).size.width * .01,),
 
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .02,
-            ),
-            //les Ambulances__________________________________________________________________
-            Row(
-              children: [
-                //l'icon
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    //padding: EdgeInsets.only(top: 20, left: 10),
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.blue
-                    ) ,
-                    child: Icon(Icons.emergency, color: Colors.white, size: 40,),
-                  ),
-                ),
+                        Container(
+                          //padding: EdgeInsets.all(5),
+                          child: Expanded(
+                            child: Container(
 
-                SizedBox(width: MediaQuery.of(context).size.width * .01,),
+                              height: 70,
+                              alignment: AlignmentDirectional.bottomStart,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.red,
+                                          width: 2
+                                      )
+                                  )
+                              ),
+                              child: Row(
+                                children: [
+                                  const Text("Ambulance", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                                  //SizedBox(width: MediaQuery.of(context).size.width * .13,),
 
-                Container(
-                  //padding: EdgeInsets.all(5),
-                  child: Expanded(
-                    child: Container(
-
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          const Text("Ambulance", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                          //SizedBox(width: MediaQuery.of(context).size.width * .13,),
-
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.call, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add_alert, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.call, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.add_alert, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+
+
+                      ],
                     ),
-                  ),
-                ),
+
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .02,
+                    ),
+
+                    //les Pompier===================================================================
+                    Row(
+                      children: [
+                        //l'icon
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            //padding: EdgeInsets.only(top: 20, left: 10),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.blue
+                            ) ,
+                            child: Icon(Icons.local_fire_department, color: Colors.red, size: 40,),
+                          ),
+                        ),
+
+                        SizedBox(width: MediaQuery.of(context).size.width * .01,),
+
+                        Container(
+                          //padding: EdgeInsets.all(5),
+                          child: Expanded(
+                            child: Container(
+
+                              height: 70,
+                              alignment: AlignmentDirectional.bottomStart,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.red,
+                                          width: 2
+                                      )
+                                  )
+                              ),
+                              child: Row(
+                                children: [
+                                  const Text("Pompier", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
 
 
-              ],
-            ),
-
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .02,
-            ),
-
-            //les Pompier===================================================================
-            Row(
-              children: [
-                //l'icon
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    //padding: EdgeInsets.only(top: 20, left: 10),
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.blue
-                    ) ,
-                    child: Icon(Icons.local_fire_department, color: Colors.red, size: 40,),
-                  ),
-                ),
-
-                SizedBox(width: MediaQuery.of(context).size.width * .01,),
-
-                Container(
-                  //padding: EdgeInsets.all(5),
-                  child: Expanded(
-                    child: Container(
-
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          const Text("Pompier", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-
-
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.call, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add_alert, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.call, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.add_alert, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+
+
+                      ],
                     ),
-                  ),
-                ),
 
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .02,
+                    ),
 
-              ],
-            ),
+                    //les Gendarmerie++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    Row(
+                      children: [
+                        //l'icon
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            padding: EdgeInsets.only(top: 20, left: 10),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.red
+                            ) ,
+                          ),
+                        ),
 
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .02,
-            ),
+                        SizedBox(width: MediaQuery.of(context).size.width * .01,),
 
-            //les Gendarmerie++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            Row(
-              children: [
-                //l'icon
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20, left: 10),
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.red
-                    ) ,
-                  ),
-                ),
+                        Container(
+                          //padding: EdgeInsets.all(5),
+                          child: Expanded(
+                            child: Container(
 
-                SizedBox(width: MediaQuery.of(context).size.width * .01,),
+                              height: 70,
+                              alignment: AlignmentDirectional.bottomStart,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.red,
+                                          width: 2
+                                      )
+                                  )
+                              ),
+                              child: Row(
+                                children: [
+                                  const Text("Gendarmerie", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
 
-                Container(
-                  //padding: EdgeInsets.all(5),
-                  child: Expanded(
-                    child: Container(
-
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          const Text("Gendarmerie", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.call, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add_alert, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.call, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.add_alert, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+
+
+                      ],
                     ),
-                  ),
-                ),
 
-
-              ],
-            ),
-
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .02,
-            ),
-            //les Protection civile-----------------------------------------------------
-            Row(
-              children: [
-                //l'icon
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20, left: 10),
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.red
-                    ) ,
-                  ),
-                ),
-
-                SizedBox(width: MediaQuery.of(context).size.width * .01,),
-
-                Container(
-                  //padding: EdgeInsets.all(5),
-                  child: Expanded(
-                    child: Container(
-
-                      height: 70,
-                      alignment: AlignmentDirectional.bottomStart,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.red,
-                                  width: 2
-                              )
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          const Text("Protection Civile", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.call, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add_alert, color: Colors.red,),
-                                  onPressed: (){},
-                                ),
-                              ],
-                            ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .02,
+                    ),
+                    //les Protection civile-----------------------------------------------------
+                    Row(
+                      children: [
+                        //l'icon
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(top: 20, left: 10),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.red
+                            ) ,
                           ),
-                        ],
-                      ),
+                        ),
+
+                        SizedBox(width: MediaQuery.of(context).size.width * .01,),
+
+                        Container(
+                          //padding: EdgeInsets.all(5),
+                          child: Expanded(
+                            child: Container(
+
+                              height: 70,
+                              alignment: AlignmentDirectional.bottomStart,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.red,
+                                          width: 2
+                                      )
+                                  )
+                              ),
+                              child: Row(
+                                children: [
+                                  const Text("Protection Civile", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.call, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.add_alert, color: Colors.red,),
+                                          onPressed: (){},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+
+                            ),
+
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .02,
+                        ),
+
+                      ],
                     ),
-                  ),
-                ),
-
-
-              ],
-            )
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .04,
+                    ),
+                  ],
+                ),)
+          )
 
           ],
         ),
