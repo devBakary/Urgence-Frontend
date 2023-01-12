@@ -235,23 +235,22 @@ showDialogWidget(BuildContext context){
                   height: MediaQuery.of(context).size.height * .02
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(15),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
-                    Container(
-                      child: const Text("Activer l'option non voyant",
+                      const Text("Activer l'option non voyant",
                       style: TextStyle(
                         fontSize:  24,
                         fontWeight: FontWeight.bold
                       ),
                       ),
-                    ),
 
                     Container(
                       alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(bottom: 18),
+                      padding: EdgeInsets.only(bottom: 18, right: 10 ),
                       child: IconButton(
                          // alignment: Alignment.,
                           onPressed: (){},
@@ -272,19 +271,24 @@ showDialogWidget(BuildContext context){
                         children:  [
                           const TabBar(
                             indicatorColor: Colors.red,
+                              indicatorWeight: 2,
+                              unselectedLabelStyle: TextStyle(color: Colors.black),
+                              unselectedLabelColor: Colors.black,
                               indicatorSize: TabBarIndicatorSize.tab,
                               tabs: [
                             Tab(
-                              icon: Icon(CupertinoIcons.home, color: Colors.red,),
+                              icon: Icon(CupertinoIcons.home, color: Colors.blue,),
+                              child: Text('Connexion', style: TextStyle(color: Colors.black),),
                             ),
 
                             Tab(
-                              icon: Icon(CupertinoIcons.home, color: Colors.deepPurple,),
+                              icon: Icon(CupertinoIcons.home, color: Colors.blue,),
+                              child: Text('Inscription', style: TextStyle(color: Colors.black),),
                             ),
                           ]),
                             Container(
                               width: double.maxFinite,
-                              height: MediaQuery.of(context).size.height * .6451,
+                              height: MediaQuery.of(context).size.height * .607,
                               child: const TabBarView(
 
                                   children: [
