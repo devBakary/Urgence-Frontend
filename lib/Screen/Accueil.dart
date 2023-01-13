@@ -6,10 +6,61 @@ import 'package:urgence_projet/Screen/Connexion.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
 import 'package:urgence_projet/Screen/Inscription.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 
-class Accueil extends StatelessWidget {
+class Accueil extends StatefulWidget {
    Accueil({Key? key}) : super(key: key);
+
+  @override
+  State<Accueil> createState() => _AccueilState();
+}
+
+class _AccueilState extends State<Accueil> {
+
+  String adresse = '';
+
+  //la localisation
+
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // teste si la geolocation est desactivée
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('La localisation est desactivée');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('La localisation a ete refusé');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, Nous ne pouvons pas avoir la permission.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+
+  }
+
+  Future<void> GetAdresseFromLonLat(Position position) async{
+
+    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+    
+    //print(placemark);
+    Placemark place = placemark[0];
+    adresse = '${place.country}';
+    print(adresse);
+  }
 
 
   @override
@@ -57,6 +108,20 @@ class Accueil extends StatelessWidget {
                 color: Colors.green,
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * .25,
+                child: ElevatedButton(onPressed: () async {
+                  Position position = await _determinePosition();
+                  print("fffffff");
+                  print(position.latitude);
+                  print(position.longitude);
+                  GetAdresseFromLonLat(position);
+
+                  setState(() {
+
+                  });
+                },
+                  child: Text("avoir la loc"),
+
+                ),
               ),
 
 
