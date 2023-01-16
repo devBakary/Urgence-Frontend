@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+Future<void> makeCall(String url) async{
+  if(await canLaunch(url)){
+    await launch(url);
+  }
+  else{
+    throw "Nous ne pouvons pas lancer l'appel sur $url";
+  }
+}
 
 class EntiteAffichage extends StatelessWidget {
   final Entite entite;
@@ -57,7 +67,10 @@ class EntiteAffichage extends StatelessWidget {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.call, color: Colors.red,),
-                            onPressed: (){},
+                            onPressed: (){
+                              print(entite.numero);
+                              makeCall('tel: ${entite.numero}');
+                              },
                           ),
                           IconButton(
                             icon: const Icon(Icons.add_alert, color: Colors.red,),
