@@ -1,22 +1,23 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
-import 'package:urgence_projet/Screen/Accueil.dart';
-import 'package:urgence_projet/Screen/ContactAbout.dart';
 import 'package:urgence_projet/Screen/Contact_tile.dart';
 import 'package:urgence_projet/Service/ContactService.dart';
 
-class ContactUrgent extends StatefulWidget {
-  const ContactUrgent({Key? key}) : super(key: key);
+
+
+class Homescreen extends StatefulWidget {
+  const Homescreen({Key? key}) : super(key: key);
 
   @override
-  State<ContactUrgent> createState() => _ContactUrgentState();
+  State<Homescreen> createState() => _HomescreenState();
 }
 
-class _ContactUrgentState extends State<ContactUrgent> {
-
+class _HomescreenState extends State<Homescreen> {
   List<Contact>? contacts;
 
   getContact() async{
@@ -42,48 +43,18 @@ class _ContactUrgentState extends State<ContactUrgent> {
       ),
     )
 
-      :Scaffold(
+        :Scaffold(
       appBar: AppBar(
-
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(CupertinoIcons.back,
-                size: 35,),
-              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil())); },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-
-
         title: Text(
             'Example Clients (${Provider.of<ContactData>(context).contacts.length})'),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-        //centerTitle: true,
-
-
       body: Container(
-        padding: const EdgeInsets.only(top: 100, left: 10),
-        child:  Column(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+
           children: [
-            //pour le texte info
-            Padding(
-              padding: const EdgeInsets.only( top: 30),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height * .14,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFDEE3E8),
-                ),
-                child: const Center(
-                  child: Text("Ajouter des numéros d’urgence pour les appeler ou partager votre position à tout moment!",
-                    style: TextStyle(fontSize: 20,),),
-                ),
-              ),
-            ),
 
             //pour le box contenant le text et l'icon
             Padding(
@@ -105,7 +76,6 @@ class _ContactUrgentState extends State<ContactUrgent> {
                 ),
               ),
             ),
-            //fin _______________________________________________ _____________
 
             SizedBox(height: MediaQuery.of(context).size.height * .02,),
             //pour ajouter le bouton
@@ -124,26 +94,30 @@ class _ContactUrgentState extends State<ContactUrgent> {
             SizedBox(
               height: MediaQuery.of(context).size.height * .02,
             ),
-            //les numeros d'urgence
-            Consumer<ContactData>(builder: (context, contactData, child) {
-              return ListView.builder(
-                  itemCount: contactData.contacts.length,
-                  itemBuilder: (context, index){
-                    Contact contact = contactData.contacts[index];
+
+
+            Flexible(
+              child: Consumer<ContactData>(
+                builder: (context, contactData, child){
+                  return ListView.builder(
+                    itemCount: contactData.contacts.length,
+                    itemBuilder: (context, index){
+                      Contact contact = contactData.contacts[index];
                       return ContactTile(
-                        contact : contact,
-                        contactData : contactData,
+                        contact: contact,
+                        contactData: contactData,
                       );
-                    }
-              );
-                
-
-            }),
-
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
-        ),
+      ),
+
     );
   }
 }
+
 

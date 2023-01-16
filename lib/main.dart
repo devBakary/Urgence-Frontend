@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/SplashScreen.dart';
 
@@ -12,10 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Urgence Mali',
-     debugShowCheckedModeBanner: false,
-      home: Splash(),
+    return ChangeNotifierProvider<ContactData>(
+        create: (context) => ContactData(),
+      child:  const MaterialApp(
+        title: 'Urgence Mali',
+       debugShowCheckedModeBanner: false,
+        home: Splash(),
+      ),
     );
   }
 }

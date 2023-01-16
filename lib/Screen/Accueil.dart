@@ -9,6 +9,7 @@ import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
+import 'package:urgence_projet/Screen/test.dart';
 
 class Accueil extends StatefulWidget {
    Accueil({Key? key}) : super(key: key);
@@ -110,7 +111,6 @@ class _AccueilState extends State<Accueil> {
                 height: MediaQuery.of(context).size.height * .25,
                 child: ElevatedButton(onPressed: () async {
                   Position position = await _determinePosition();
-                  print("fffffff");
                   print(position.latitude);
                   print(position.longitude);
                   GetAdresseFromLonLat(position);
@@ -180,7 +180,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>ContactUrgent()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Homescreen()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
