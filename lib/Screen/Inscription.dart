@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/About.dart';
+
+import '../Service/ContactService.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({Key? key}) : super(key: key);
@@ -8,8 +11,15 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionState extends State<Inscription> {
+
+  TextEditingController usernameController= TextEditingController();
+  TextEditingController passwordController= TextEditingController();
+   ContactServices contactServices = ContactServices();
+
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -31,45 +41,32 @@ class _InscriptionState extends State<Inscription> {
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(
-                children: const [
+                children:  [
                   Text("Username"),
-                  TextField(
-                    decoration: InputDecoration(
+                   TextField(
+                    controller: usernameController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Username',
                     ),
                   ),
-                  SizedBox(height: 10,),
-                  TextField(
-                    decoration: InputDecoration(
+                  const SizedBox(height: 10,),
+
+
+                  const SizedBox(height: 10,),
+                   TextField(
+                     controller: passwordController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Email',
+                      hintText: 'password',
                     ),
                   ),
 
-                  SizedBox(height: 10,),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Numero',
-                    ),
-                  ),
-
-                  SizedBox(height: 10,),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Adresse',
-                    ),
-                  ),
-
-                  SizedBox(height: 10,),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Password',
-                    ),
-                  ),
+                  const SizedBox(height: 10,),
+                  ElevatedButton(onPressed: (){
+                    contactServices.login(usernameController.text, passwordController.text);
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>Apropos()), (route) => false);
+                  }, child: const Text('Connexion'),)
                 ],
               ),
             ),

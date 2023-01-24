@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:html';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
@@ -7,6 +9,8 @@ import 'package:urgence_projet/Service/globals.dart';
 
 //Mon service de liaison avec mon backend
 class ContactServices{
+
+  final storage = new FlutterSecureStorage();
 
   // pour la'ajout des clients
   static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse) async{
@@ -32,6 +36,32 @@ class ContactServices{
 
     return contact;
   }
+
+
+  //==================== Pour l'authentification = ================
+  Future<http.Response> login(String username, String password) async {
+    Map data = {'username': username, 'password': password};
+    var body = jsonEncode(data);
+    var url = Uri.parse(baseURL + "/auth/connexion");
+    http.Response response = await http.post(url, headers: headers, body: body);
+
+    if (response.statusCode == 200) {
+      var loginArr = json.decode(response.body);
+       await storage.write(key: "token", value: loginArr['accessToken']);
+      print(loginArr['accessToken']);
+
+    } else {
+      print('login Error');
+    }
+
+    return response;
+
+  }
+
+
+
+
+
 
   //pour la methode get
   static Future<List<Contact>> getContact() async{

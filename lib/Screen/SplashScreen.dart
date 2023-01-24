@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Container(
         child: Center(
-            child: Image.asset("assets/images/urgSplash.jpg", width: 200,
+            child: Image.asset("assets/images/loggo.png", width: 200,
             )
         ),
       ),

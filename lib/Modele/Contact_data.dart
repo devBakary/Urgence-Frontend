@@ -21,6 +21,7 @@ class ContactData extends ChangeNotifier{
     notifyListeners();
   }
 
+
   //la methode pour supprimer un client
   void deleteClient(Contact contact){
     contacts.remove(contact);
