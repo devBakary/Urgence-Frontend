@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/test.dart';
+import 'package:urgence_projet/Screen/video.dart';
 
 class Accueil extends StatefulWidget {
    Accueil({Key? key}) : super(key: key);
@@ -232,7 +233,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Apropos()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>VideoPlayerScreen()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
