@@ -30,13 +30,13 @@ class EntiteAffichage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(0),
             child: Container(
-              padding: EdgeInsets.only(top: 20, left: 10),
+              //padding: EdgeInsets.only(top: 20, left: 10),
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.red
+                  borderRadius: BorderRadius.circular(100),e
               ) ,
+              child: Image.asset("assets/images/${entite.img}", width: 20,height: 20,),
             ),
           ),
 

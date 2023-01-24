@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +10,7 @@ import 'package:urgence_projet/Service/globals.dart';
 class ContactServices{
 
   final storage = new FlutterSecureStorage();
+  var iduser ;
 
   // pour la'ajout des clients
   static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse) async{
