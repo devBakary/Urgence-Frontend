@@ -50,13 +50,12 @@ class ContactData extends ChangeNotifier{
   List<Entite> entite = [];
 
 
+  List<Localisation> localisations = [];
 
-  late String _iduser;
+  void adresse(String locLongitude, String locLatitude) async{
 
-  String get iduser => _iduser;
-
-    set iduser(String value) {
-      _iduser = value;
-      notifyListeners();
-    }
+    Localisation localisation = await ContactServices.location(locLongitude, locLatitude);
+    localisations.add(localisation);
+    notifyListeners();
+  }
 }

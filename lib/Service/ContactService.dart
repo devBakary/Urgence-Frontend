@@ -30,11 +30,10 @@ class ContactServices{
         headers: headers,
         body: body
     );
-    print(response.body);
     Map responseMap = jsonDecode(response.body);
 
     Contact contact = Contact.fromMap(responseMap);
-
+    print('c moi');
     return contact;
   }
 
@@ -54,7 +53,6 @@ class ContactServices{
       final prefs=await SharedPreferences.getInstance();
       await prefs.setInt('id',loginArr['id']);
       final value=prefs.getInt('id');
-        print(value);
 
     } else {
       print('login Error');
@@ -89,7 +87,6 @@ class ContactServices{
         headers: headers,
         body: body
     );
-    print(response.body);
 
     //on va decoder les donnee envoyer en parametre
     Map responseMap = json.decode(response.body);
@@ -100,7 +97,30 @@ class ContactServices{
     return user;
   }
 
+//======== methode pour envoyer la localisation=========
+  static Future<Localisation> location(String longitude, String latitude) async{
+    Map data = {
+      "longitude" : longitude.toString(),
+      "latitude" : latitude.toString()
+    };
+     
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + '/signale/creer');
 
+    http.Response response = await http.post(url,
+                                      headers: headers,
+                                      body: body);
+
+    Map responseMap = json.decode(response.body);
+    print(response.body);
+    print('ca marche ici');
+    Localisation localisation = Localisation.fromMap(responseMap);
+    print(localisation);
+    return localisation;
+    
+  }
+  
+  
   //pour la methode get des contacts de l'utilisateur
   static Future<List<Contact>> getContact(int id) async{
     var url = Uri.parse(baseURL + '/contact/liste/$id');
@@ -108,7 +128,6 @@ class ContactServices{
       headers: headers,
     );
 
-    print(response.body);
     List responseList = jsonDecode(response.body);
     List<Contact> contacts = [];
     for (Map contactMap in responseList){
@@ -128,7 +147,6 @@ class ContactServices{
     http.Response response = await http.delete(url,
       headers: headers,
     );
-    print(response.body);
     return response;
   }
 
@@ -138,7 +156,6 @@ class ContactServices{
     http.Response  response = await http.get(url,
       headers: headers,);
 
-      print(response.body);
       List responseList = jsonDecode(response.body);
       List<Entite> entites = [];
       for (Map entiteMap in responseList){
@@ -147,6 +164,5 @@ class ContactServices{
       }
       return entites;
   }
-
 
 }

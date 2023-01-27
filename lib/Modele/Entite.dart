@@ -22,3 +22,22 @@ class Entite{
     );
   }
 }
+
+class Localisation{
+  //final int id;
+  final String longitude;
+  final String latitude;
+
+  Localisation({
+    //required this.id,
+    required this.longitude,
+    required this.latitude
+});
+
+  factory Localisation.fromMap(Map localisationMap){
+    return Localisation(
+        //id: localisationMap['id'],
+        longitude: localisationMap['longitude'] ,
+        latitude: localisationMap['latitude']);
+  }
+}
