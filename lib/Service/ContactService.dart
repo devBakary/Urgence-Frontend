@@ -1,23 +1,19 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
+import 'package:urgence_projet/Modele/User.dart';
 import 'package:urgence_projet/Service/UserSecureStorage.dart';
 import 'package:urgence_projet/Service/globals.dart';
 
-import '../Modele/Contact_data.dart';
+
 
 //Mon service de liaison avec mon backend
 class ContactServices{
 
-  static final _storage = new FlutterSecureStorage();
-
-  var iduser ;
-
-  // pour la'ajout des clients
+  // ===== methode pour l'ajout des contact de l'utilisateur =========================
   static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse) async{
     Map data = {
       "nom": nom,
@@ -58,13 +54,7 @@ class ContactServices{
       final prefs=await SharedPreferences.getInstance();
       await prefs.setInt('id',loginArr['id']);
       final value=prefs.getInt('id');
-
-      print("autre================");
         print(value);
-       //await storage.write(key: "token", value: loginArr['accessToken']);
-       //iduser = storage.write(key: iduser, value: loginArr['id']);
-      print(loginArr['id']);
-      print(loginArr);
 
     } else {
       print('login Error');
@@ -73,9 +63,45 @@ class ContactServices{
     return response;
 
   }
+  //========= fin de la partie de l'authentification================
 
 
-  //pour la methode get
+
+  //====== methode pour ajouter des contact de l'utilisateur
+  static Future<Users> inscriprtion(String username, String email, String numero, String adresse, String password) async{
+   //on mappe les données
+    Map data = {
+      "username": username,
+      "email": email,
+      "numero": numero,
+      "adresse": adresse,
+      "password": password,
+    };
+    
+    //puis une variable qui va contenir nos données
+    var body = json.encode(data);
+    
+    //on va declarer notre chemin de requette
+    var url = Uri.parse(baseURL + '/auth/inscription');
+
+    //on va envoyer la requette
+    http.Response response = await http.post(url,
+        headers: headers,
+        body: body
+    );
+    print(response.body);
+
+    //on va decoder les donnee envoyer en parametre
+    Map responseMap = json.decode(response.body);
+    
+    //on va creer une nouvelle instance de l'utilisateur
+    Users user = Users.fromMap(responseMap);
+
+    return user;
+  }
+
+
+  //pour la methode get des contacts de l'utilisateur
   static Future<List<Contact>> getContact(int id) async{
     var url = Uri.parse(baseURL + '/contact/liste/$id');
     http.Response response = await http.get(url,
@@ -93,7 +119,8 @@ class ContactServices{
     return contacts;
   }
 
-  //pour le delete
+
+  //======= methode pour effacer les contacts de l'utilisateur =======
   static Future<http.Response> deleteContact(int id) async {
     var url = Uri.parse(baseURL + '/contact/delete/$id');
     print(id);
@@ -105,7 +132,7 @@ class ContactServices{
     return response;
   }
 
-  //================== recuperation de la liste des entite===========
+  //================== recuperation de la liste des entite ===========
   static Future<List<Entite>> getEntite() async{
     var url = Uri.parse(baseURL + '/entite/liste');
     http.Response  response = await http.get(url,
@@ -121,14 +148,5 @@ class ContactServices{
       return entites;
   }
 
-/*
-  bool isLogged() {
-    if (this.iduser != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-*/
 
 }
