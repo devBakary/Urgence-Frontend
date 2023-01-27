@@ -34,7 +34,7 @@ class EntiteAffichage extends StatelessWidget {
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),e
+                  borderRadius: BorderRadius.circular(100),
               ) ,
               child: Image.asset("assets/images/${entite.img}", width: 20,height: 20,),
             ),

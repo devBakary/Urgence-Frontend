@@ -2,14 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
+import 'package:urgence_projet/Service/UserSecureStorage.dart';
 import 'package:urgence_projet/Service/globals.dart';
+
+import '../Modele/Contact_data.dart';
 
 //Mon service de liaison avec mon backend
 class ContactServices{
 
-  final storage = new FlutterSecureStorage();
+  static final _storage = new FlutterSecureStorage();
+
   var iduser ;
 
   // pour la'ajout des clients
@@ -47,8 +52,19 @@ class ContactServices{
 
     if (response.statusCode == 200) {
       var loginArr = json.decode(response.body);
-       await storage.write(key: "token", value: loginArr['accessToken']);
-      print(loginArr['accessToken']);
+      await UserSecureStorage.setId(loginArr['id']);
+
+
+      final prefs=await SharedPreferences.getInstance();
+      await prefs.setInt('id',loginArr['id']);
+      final value=prefs.getInt('id');
+
+      print("autre================");
+        print(value);
+       //await storage.write(key: "token", value: loginArr['accessToken']);
+       //iduser = storage.write(key: iduser, value: loginArr['id']);
+      print(loginArr['id']);
+      print(loginArr);
 
     } else {
       print('login Error');
@@ -59,13 +75,9 @@ class ContactServices{
   }
 
 
-
-
-
-
   //pour la methode get
-  static Future<List<Contact>> getContact() async{
-    var url = Uri.parse(baseURL + '/contact/liste');
+  static Future<List<Contact>> getContact(int id) async{
+    var url = Uri.parse(baseURL + '/contact/liste/$id');
     http.Response response = await http.get(url,
       headers: headers,
     );
@@ -108,5 +120,15 @@ class ContactServices{
       }
       return entites;
   }
+
+/*
+  bool isLogged() {
+    if (this.iduser != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+*/
 
 }

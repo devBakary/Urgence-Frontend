@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/ContactAbout.dart';
 import 'package:urgence_projet/Screen/Contact_tile.dart';
 import 'package:urgence_projet/Service/ContactService.dart';
+
+import '../Service/UserSecureStorage.dart';
 
 class ContactUrgent extends StatefulWidget {
   const ContactUrgent({Key? key}) : super(key: key);
@@ -17,13 +20,21 @@ class ContactUrgent extends StatefulWidget {
 
 class _ContactUrgentState extends State<ContactUrgent> {
 
+  ContactServices contactServices = ContactServices();
   List<Contact>? contacts;
+   var idU = 1;
+   int value1 = 1;
+
+
 
   getContact() async{
-    contacts = await ContactServices.getContact();
+    contacts = await ContactServices.getContact(idU);
     Provider.of<ContactData>(context, listen: false).contacts = contacts!;
     setState(() { });
   }
+
+
+
 
 
   @override
@@ -146,4 +157,6 @@ class _ContactUrgentState extends State<ContactUrgent> {
     );
   }
 }
+
+
 

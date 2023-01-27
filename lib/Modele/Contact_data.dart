@@ -35,4 +35,15 @@ class ContactData extends ChangeNotifier{
   //==== liste des entités
 
   List<Entite> entite = [];
+
+
+
+  late String _iduser;
+
+  String get iduser => _iduser;
+
+    set iduser(String value) {
+      _iduser = value;
+      notifyListeners();
+    }
 }

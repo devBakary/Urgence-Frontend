@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
+import 'package:urgence_projet/Screen/test.dart';
 
 import '../Service/ContactService.dart';
+import 'ContactUrgent.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class _InscriptionState extends State<Inscription> {
   TextEditingController usernameController= TextEditingController();
   TextEditingController passwordController= TextEditingController();
    ContactServices contactServices = ContactServices();
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,7 @@ class _InscriptionState extends State<Inscription> {
                   const SizedBox(height: 10,),
                   ElevatedButton(onPressed: (){
                     contactServices.login(usernameController.text, passwordController.text);
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>Apropos()), (route) => false);
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>Homescreen()),);
                   }, child: const Text('Connexion'),)
                 ],
               ),

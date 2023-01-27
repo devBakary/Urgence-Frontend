@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Screen/Contact_tile.dart';
@@ -20,8 +21,28 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   List<Contact>? contacts;
 
+   var id = 0;
+  var value1 = 0;
+
+
+  Future init() async {
+    final prefs=await SharedPreferences.getInstance();
+    value1 = prefs.getInt('id')!;
+    print("je suis un tst" );
+    print(value1);
+    print("je suis un tst" );
+    setState(() {
+      this.id = value1;
+      print("moi");
+      print(id);
+      print("moi");
+      id;
+
+    });
+  }
+
   getContact() async{
-    contacts = await ContactServices.getContact();
+    contacts = await ContactServices.getContact(id);
     Provider.of<ContactData>(context, listen: false).contacts = contacts!;
     setState(() { });
   }
@@ -30,7 +51,9 @@ class _HomescreenState extends State<Homescreen> {
   @override
   void initState(){
     super.initState();
+    init();
     getContact();
+
   }
 
 
@@ -46,9 +69,9 @@ class _HomescreenState extends State<Homescreen> {
         :Scaffold(
       appBar: AppBar(
         title: Text(
-            'Example Clients (${Provider.of<ContactData>(context).contacts.length})'),
+            'Example  (${Provider.of<ContactData>(context).contacts.length})'),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
