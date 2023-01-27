@@ -69,7 +69,7 @@ class _InscriptionState extends State<Inscription> {
                   const SizedBox(height: 10,),
                   ElevatedButton(onPressed: (){
                     contactServices.login(usernameController.text, passwordController.text);
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>Homescreen()),);
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) =>Accueil()), (Route) => false);
                   }, child: const Text('Connexion'),)
                 ],
               ),

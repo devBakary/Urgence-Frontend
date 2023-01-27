@@ -22,23 +22,27 @@ class _HomescreenState extends State<Homescreen> {
   List<Contact>? contacts;
 
    var id = 0;
-  var value1 = 0;
+   var value1 = 0;
 
 
   Future init() async {
-    final prefs=await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     value1 = prefs.getInt('id')!;
-    print("je suis un tst" );
-    print(value1);
-    print("je suis un tst" );
-    setState(() {
+    if(value1 != null){
       this.id = value1;
-      print("moi");
-      print(id);
-      print("moi");
-      id;
+      setState(() {
 
-    });
+      });
+    }
+    else{
+      value1 = 0;
+      this.id = value1;
+      setState(() {
+
+      });
+    }
+
+    getContact();
   }
 
   getContact() async{
@@ -47,13 +51,22 @@ class _HomescreenState extends State<Homescreen> {
     setState(() { });
   }
 
+  logout() async{
+    final prefs = await SharedPreferences.getInstance();
+    final success = await prefs.remove('id');
+    print("ca marche");
+    setState(() {
+      success;
+    });
+    getContact();
+  }
+
 
   @override
   void initState(){
     super.initState();
     init();
-    getContact();
-
+    id= 0;
   }
 
 
@@ -105,7 +118,9 @@ class _HomescreenState extends State<Homescreen> {
             Container(
               child: Center(
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    logout();
+                  },
                   child: const Text("Ajouter"),
                   style: ElevatedButton.styleFrom(
                       minimumSize: Size(200, 40)
