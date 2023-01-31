@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/Connexions.dart';
+import 'package:urgence_projet/Screen/FirstPage.dart';
 
 import 'Accueil.dart';
 
@@ -19,7 +21,7 @@ class _SplashState extends State<Splash> {
 
     Future.delayed(const Duration(seconds: 4)).then((value) {
       Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) =>  Accueil()));
+          CupertinoPageRoute(builder: (context) =>  Connexions()));
     });
   }
   Widget build(BuildContext context) {

@@ -60,7 +60,7 @@ class _InscriptionState extends State<Inscription> {
                   const SizedBox(height: 10,),
                    TextField(
                      controller: passwordController,
-                    decoration: const InputDecoration(
+                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'password',
                     ),

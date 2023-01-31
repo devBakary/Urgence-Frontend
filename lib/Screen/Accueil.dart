@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/Connexion.dart';
+import 'package:urgence_projet/Screen/Connexions.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
 import 'package:urgence_projet/Screen/Inscription.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
@@ -58,7 +59,7 @@ class _AccueilState extends State<Accueil> {
 
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     
-    //print(placemark);
+    print(placemark);
     Placemark place = placemark[0];
     adresse = '${place.country}';
     print(adresse);
@@ -360,7 +361,7 @@ showDialogWidget(BuildContext context){
 
                                   children: [
 
-                                    Connexion(),
+                                    Connexions(),
                                     Inscription(),
 
                               ]),
