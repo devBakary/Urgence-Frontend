@@ -5,7 +5,6 @@ import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/Connexion.dart';
 import 'package:urgence_projet/Screen/Connexions.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
-import 'package:urgence_projet/Screen/Drawer.dart';
 import 'package:urgence_projet/Screen/Inscription.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,6 +12,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/test.dart';
 import 'package:urgence_projet/Screen/video.dart';
+
+import 'Geste de secours.dart';
 
 class Accueil extends StatefulWidget {
    Accueil({Key? key}) : super(key: key);
@@ -94,7 +95,6 @@ class _AccueilState extends State<Accueil> {
                 iconSize: 35,
                 alignment: Alignment.center,
                 onPressed: (){
-                  const MyDrawer();
                   //showDialogWidget(context);
                 },
               )
@@ -210,7 +210,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MyDrawer()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>GesteSecours()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(

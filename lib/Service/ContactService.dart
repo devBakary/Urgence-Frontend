@@ -8,6 +8,8 @@ import 'package:urgence_projet/Modele/User.dart';
 import 'package:urgence_projet/Service/UserSecureStorage.dart';
 import 'package:urgence_projet/Service/globals.dart';
 
+import '../Modele/mes gestes.dart';
+
 
 
 //Mon service de liaison avec mon backend
@@ -163,6 +165,31 @@ class ContactServices{
         entites.add(entite);
       }
       return entites;
+  }
+
+  //================== recuperation de la liste des gestes ===========
+  static Future<List<Geste>> getGeste() async{
+    var url = Uri.parse(baseURL + '/geste/afficher');
+    http.Response  response = await http.get(url,
+      headers: headers,);
+
+    List responseList = jsonDecode(response.body);
+    print("slt");
+    print(response.body);
+    print("slt");
+    List<Geste> gestes = [];
+    for (Map gesteMap in responseList){
+      Geste geste = Geste.fromMap(gesteMap);
+      gestes.add(geste);
+      final prefs=await SharedPreferences.getInstance();
+      await prefs.setInt('id',gesteMap['id']);
+      final value=prefs.getInt('id');
+      print('ici');
+      print(value);
+      print('ici');
+    }
+    return gestes;
+
   }
 
 }
