@@ -10,6 +10,7 @@ import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
+import 'package:urgence_projet/Screen/detail%20de%20secours.dart';
 import 'package:urgence_projet/Screen/test.dart';
 import 'package:urgence_projet/Screen/video.dart';
 
@@ -95,7 +96,7 @@ class _AccueilState extends State<Accueil> {
                 iconSize: 35,
                 alignment: Alignment.center,
                 onPressed: (){
-                  //showDialogWidget(context);
+                  showDialogWidget(context);
                 },
               )
             ),
@@ -210,7 +211,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>GesteSecours()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MaFiche()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -236,7 +237,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>VideoPlayerScreen()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Apropos()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -284,6 +285,7 @@ showDialogWidget(BuildContext context){
 
         Container(
         height: MediaQuery.of(context).size.height * 0.94,
+
           child: Column(
             children:  [
                Center(
@@ -335,43 +337,42 @@ showDialogWidget(BuildContext context){
                   height: MediaQuery.of(context).size.height * .009
               ),
 
-              DefaultTabController(
-                  length: 2,
-                  child: Column(
-                        children:  [
-                          const TabBar(
-                            indicatorColor: Colors.red,
-                              indicatorWeight: 2,
-                              unselectedLabelStyle: TextStyle(color: Colors.black),
-                              unselectedLabelColor: Colors.black,
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              tabs: [
-                            Tab(
-                              icon: Icon(CupertinoIcons.home, color: Colors.blue,),
-                              child: Text('Connexion', style: TextStyle(color: Colors.black),),
-                            ),
-
-                            Tab(
-                              icon: Icon(CupertinoIcons.home, color: Colors.blue,),
-                              child: Text('Inscription', style: TextStyle(color: Colors.black),),
-                            ),
-                          ]),
-                            Container(
-                              width: double.maxFinite,
-                              height: MediaQuery.of(context).size.height * .607,
-                              child: const TabBarView(
-
-                                  children: [
-
-                                    Connexions(),
-                                    Inscription(),
-
-                              ]),
-                            ),
-
-                        ],
+             Center(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>GesteSecours()));
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * .9,
+                      decoration: BoxDecoration(
+                        color: Colors.blueAccent,
                       ),
+                      child: Center(child: const Text("Geste", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)),
+                    ),
                   ),
+                  SizedBox(height: 5,),
+
+
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Aide()));
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * .9,
+                      decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                      ),
+                      child: Center(child: const Text("Aide", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)),
+                    ),
+                  ),
+                  SizedBox(height: 5,)
+                ],
+              )
+            )
             ],
           ),
 

@@ -81,10 +81,10 @@ class _HomescreenState extends State<Homescreen> {
 
         :Scaffold(
       appBar: AppBar(
-        title: Text(
-            'Example  (${Provider.of<ContactData>(context).contacts.length})'),
-        centerTitle: true,
-        backgroundColor: Colors.red,
+        title: const Text(
+            "Mes Contact"),
+            centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -119,7 +119,7 @@ class _HomescreenState extends State<Homescreen> {
               child: Center(
                 child: ElevatedButton(
                   onPressed: (){
-                    logout();
+                    _ouvrirTab(context);
                   },
                   child: const Text("Ajouter"),
                   style: ElevatedButton.styleFrom(
@@ -156,6 +156,145 @@ class _HomescreenState extends State<Homescreen> {
 
     );
   }
+}
+
+
+
+void _ouvrirTab(context){
+
+
+   String contactNom = '';
+   String contactPrenom = "";
+   String contactEmail = "";
+   String contactNumero = "";
+   String contactAdresse = "";
+
+  showModalBottomSheet(context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      builder: (BuildContext bc)
+      {
+        return SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height * .90,
+            color: Colors.white,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: const Icon(
+                            Icons.close,
+                            size: 40,
+                          ),
+                        ),
+
+                        const Text("Nouveau Contact", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+
+                         InkWell(
+                          onTap: (){
+                              Provider.of<ContactData>(context, listen: false).addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse);
+                              Navigator.pop(context);
+                              print('okkkk');
+
+                          },
+                          child: const Text("OK", style: TextStyle(fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue),
+
+                          ),
+                        ),
+
+                      ]
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    child: const Center(
+                      child: Icon(CupertinoIcons.person_circle_fill,
+                          size: 140,
+                          color: Colors.black54),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding:  EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (val){
+                      contactPrenom = val;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'Prenom',
+                        border: UnderlineInputBorder()
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (val){
+                      contactNom = val;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'Nom',
+                        border: UnderlineInputBorder()
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (val){
+                      contactEmail = val;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'example@gmail.com',
+                        border: UnderlineInputBorder()
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (val){
+                      contactNumero = val;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'numéro',
+                        border: UnderlineInputBorder()
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (val){
+                      contactAdresse = val;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'Adresse',
+                        border: UnderlineInputBorder()
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        );
+      });
 }
 
 

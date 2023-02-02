@@ -174,9 +174,6 @@ class ContactServices{
       headers: headers,);
 
     List responseList = jsonDecode(response.body);
-    print("slt");
-    print(response.body);
-    print("slt");
     List<Geste> gestes = [];
     for (Map gesteMap in responseList){
       Geste geste = Geste.fromMap(gesteMap);
@@ -184,11 +181,26 @@ class ContactServices{
       final prefs=await SharedPreferences.getInstance();
       await prefs.setInt('id',gesteMap['id']);
       final value=prefs.getInt('id');
-      print('ici');
-      print(value);
-      print('ici');
+
     }
     return gestes;
+
+  }
+
+  //================== recuperation de la liste de geste par id ===========
+  static Future<List<Geste>> getDetails(int id) async{
+    var url = Uri.parse(baseURL + '/geste/liste/$id');
+    http.Response  response = await http.get(url,
+      headers: headers,);
+
+    List responseList = jsonDecode(response.body);
+    List<Geste> dgestes = [];
+    for (Map gesteMap in responseList){
+      Geste geste = Geste.fromMap(gesteMap);
+      dgestes.add(geste);
+
+    }
+    return dgestes;
 
   }
 

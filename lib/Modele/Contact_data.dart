@@ -18,6 +18,9 @@ class ContactData extends ChangeNotifier{
 
   List<Geste> gestes = [];
 
+  //detail geste
+  List<Geste> dgestes = [];
+
 
   //la methode pour ajouter un contact
   void addContact(String contactNom, String contactPrenom, String contactEmail, String contactNumero, String contactAdresse) async{

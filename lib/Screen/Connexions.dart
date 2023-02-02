@@ -115,9 +115,30 @@ class _ConnexionsState extends State<Connexions> {
                             height: 45,
                             child: ElevatedButton(
                               onPressed: () {
-                                contactServices.login(usernameController.text, passwordController.text);
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
-                              },
+                                if(usernameController != null || passwordController != null){
+                                  contactServices.login(usernameController.text, passwordController.text);
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
+                                }
+                                else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          backgroundColor: Colors.white,
+                                          elevation: 5,
+                                          dismissDirection: DismissDirection.down,
+                                          content: Container(
+                                            height: 100,
+                                            width: MediaQuery.of(context).size.width * .90,
+                                            color: Colors.white,
+                                            child: const Center(
+                                                child: Text("Tous les champs doivent être remplis !",
+                                                  style: TextStyle(fontSize: 24, color: Colors.red),
+                                                  textAlign: TextAlign.center,)
+                                            ),
+                                          )
+                                      )
+                                  );
+                                }
+                                },
                               style: ElevatedButton.styleFrom(
                                 elevation: 3,
                               ),
