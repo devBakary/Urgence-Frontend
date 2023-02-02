@@ -30,14 +30,14 @@ class _ConnexionsState extends State<Connexions> {
             ),
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/b.jpg"),
+                  image: AssetImage("assets/images/toff.png"),
                   fit: BoxFit.cover),
 
             ),
             child: Column(
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Container(
 
                   ),
@@ -112,10 +112,11 @@ class _ConnexionsState extends State<Connexions> {
 
                           Container(
                             width: double.infinity,
-                            height: 50,
+                            height: 45,
                             child: ElevatedButton(
                               onPressed: () {
                                 contactServices.login(usernameController.text, passwordController.text);
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 3,
@@ -131,7 +132,7 @@ class _ConnexionsState extends State<Connexions> {
                           //container contenant le bouton de inscription
                           Container(
                             width: double.infinity,
-                            height: 50,
+                            height: 45,
                             child: ElevatedButton(
                               onPressed: (){
 
@@ -147,20 +148,6 @@ class _ConnexionsState extends State<Connexions> {
                             ),
                           ),
 
-                          SizedBox(height: MediaQuery.of(context).size.height * .08,),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:  [
-                             InkWell(
-                               onTap: (){
-                                 Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
-                               },
-                                 child: Text("Sauter", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),)),
-                              SizedBox(width: 3,),
-                              Icon(CupertinoIcons.right_chevron, size: 26,)
-                            ],
-                          )
                         ],
                       ),
                     ),

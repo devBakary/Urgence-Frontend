@@ -5,6 +5,7 @@ import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/Connexion.dart';
 import 'package:urgence_projet/Screen/Connexions.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
+import 'package:urgence_projet/Screen/Drawer.dart';
 import 'package:urgence_projet/Screen/Inscription.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:geolocator/geolocator.dart';
@@ -93,7 +94,8 @@ class _AccueilState extends State<Accueil> {
                 iconSize: 35,
                 alignment: Alignment.center,
                 onPressed: (){
-                  showDialogWidget(context);
+                  const MyDrawer();
+                  //showDialogWidget(context);
                 },
               )
             ),
@@ -208,7 +210,7 @@ class _AccueilState extends State<Accueil> {
 
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MaFiche()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MyDrawer()));
                               },
                               child: Container(
                                 decoration: BoxDecoration(

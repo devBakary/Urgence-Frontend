@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/Connexions.dart';
 
+import '../Modele/Contact_data.dart';
 import '../Service/ContactService.dart';
 
 class Inscriptions extends StatefulWidget {
@@ -14,9 +16,11 @@ class Inscriptions extends StatefulWidget {
 
 class _InscriptionsState extends State<Inscriptions> {
 
-  TextEditingController usernameController= TextEditingController();
-  TextEditingController passwordController= TextEditingController();
-  ContactServices contactServices = ContactServices();
+  String userUsername = '';
+  String userEmail = '';
+  String userNumero = '';
+  String userAdresse = '';
+  String userPassword = '';
 
   bool _obscureText = true;
   @override
@@ -66,7 +70,7 @@ class _InscriptionsState extends State<Inscriptions> {
                     child: Column(
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height * .55,
+                          height: MediaQuery.of(context).size.height * .60,
                           padding: const EdgeInsets.all(20.0),
                           child: SingleChildScrollView(
                             child: Column(
@@ -75,7 +79,9 @@ class _InscriptionsState extends State<Inscriptions> {
                               children: [
                                 SizedBox(height: MediaQuery.of(context).size.height * .04,),
                                 TextField(
-                                  controller: usernameController,
+                                    onChanged: (val){
+                                    userUsername = val;
+                                    },
                                   decoration: InputDecoration(
                                       labelText: 'Nom d\'utilisateur',
                                       border: OutlineInputBorder(
@@ -96,7 +102,9 @@ class _InscriptionsState extends State<Inscriptions> {
 
                                 //email
                                 TextField(
-                                  controller: usernameController,
+                                  onChanged: (val){
+                                  userEmail = val;
+                                  },
                                   decoration: InputDecoration(
                                       labelText: 'Email',
                                       border: OutlineInputBorder(
@@ -114,9 +122,11 @@ class _InscriptionsState extends State<Inscriptions> {
                                 ),
                                 SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-
+                                //numero
                                 TextField(
-                                  controller: usernameController,
+                                  onChanged: (val){
+                                  userNumero = val;
+                                  },
                                   decoration: InputDecoration(
                                       labelText: 'Numero',
                                       border: OutlineInputBorder(
@@ -134,9 +144,11 @@ class _InscriptionsState extends State<Inscriptions> {
                                 ),
                                 SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-
+                                //adresse
                                 TextField(
-                                  controller: usernameController,
+                                  onChanged: (val){
+                                  userAdresse = val;
+                                  },
                                   decoration: InputDecoration(
                                       labelText: 'Adresse',
                                       border: OutlineInputBorder(
@@ -154,8 +166,11 @@ class _InscriptionsState extends State<Inscriptions> {
                                 ),
                                 SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
+                                //mot de passe
                                 TextField(
-                                  controller: passwordController,
+                                  onChanged: (val){
+                                  userPassword = val;
+                                  },
                                   obscureText: _obscureText,
                                   decoration: InputDecoration(
                                       labelText: 'Mot de passe ',
@@ -193,19 +208,44 @@ class _InscriptionsState extends State<Inscriptions> {
                           width: double.infinity,
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: () {
-                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               elevation: 3,
                             ),
+                              onPressed: (){
+                                  if(userUsername.isNotEmpty && userNumero.isNotEmpty && userEmail.isNotEmpty && userPassword.isNotEmpty && userAdresse.isNotEmpty){
+                                       Provider.of<ContactData>(context, listen: false).inscriptionUser(userUsername, userEmail, userNumero, userAdresse, userPassword
+                                  );
+                                    Navigator.pop(context);
+                                    print('okkkk');
+                                    }
+                                  else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                       SnackBar(
+                                         backgroundColor: Colors.white,
+                                          elevation: 5,
+                                          dismissDirection: DismissDirection.down,
+                                          content: Container(
+                                            height: 100,
+                                            width: MediaQuery.of(context).size.width * .90,
+                                            color: Colors.white,
+                                            child: const Center(
+                                                child: Text("Tous les champs doivent être remplis !",
+                                                  style: TextStyle(fontSize: 24, color: Colors.red),
+                                                  textAlign: TextAlign.center,)
+                                            ),
+                                          )
+                                      )
+                                    );
+                                  }
+                                  },
                             child: const Text(
                               'Inscription',
                               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
                           ),
                         ),
 
-                        SizedBox(height: MediaQuery.of(context).size.height * .05,),
+                        SizedBox(height: MediaQuery.of(context).size.height * .03,),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
