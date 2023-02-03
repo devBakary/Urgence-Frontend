@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
+import 'package:urgence_projet/global.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //pour passer l'appel
@@ -31,8 +33,10 @@ class EntiteAffichage extends StatefulWidget {
 
 class _EntiteAffichageState extends State<EntiteAffichage> {
 
-  var locLongitude;
-  var locLatitude;
+  var Longitude;
+  var Latitude;
+  String locLongitude = "";
+  String  locLatitude = "";
 
 //la localisation
 
@@ -76,27 +80,20 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
   localisation() async{
     Position position = await _determinePosition();
 
-    this.locLongitude = position.longitude.toString() ;
-    this.locLatitude = position.latitude.toString() ;
+    lon = position.longitude;
+    lat = position.latitude ;
 
+    print(lon);
+    print(Latitude);
     GetAdresseFromLonLat(position);
-    final prefs=await SharedPreferences.getInstance();
-    await prefs.setInt('locLongitude',locLongitude);
-    await prefs.setInt('locLatitude',locLatitude);
+    /*final prefs=await SharedPreferences.getInstance();
+    await prefs.setInt('Longitude',Longitude as int);
+    await prefs.setInt('Latitude',Latitude);
     final value=prefs.getInt('locLongitude');
-    final value1=prefs.getInt('locLatitude');
+    final value1=prefs.getInt('locLatitude');*/
     setState(() {
 
     });
-    send();
-  }
-
-  send() async{
-    final prefs = await SharedPreferences.getInstance();
-    locLongitude = prefs.getInt('locLongitude')!;
-    locLatitude = prefs.getInt('locLatitude')!;
-    Provider.of<ContactData>(context, listen: false).adresse(locLongitude, locLatitude);
-
   }
 
   @override
@@ -161,8 +158,8 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                           IconButton(
                             icon: const Icon(Icons.add_alert, color: Colors.red,),
                             onPressed: (){
-                                send();
-                                print("ojjjjjjjjjjjjjjj");
+                              Provider.of<ContactData>(context, listen: false).adresse(lon, lat);
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Accueil()));
 
                             },
                           ),

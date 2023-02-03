@@ -18,48 +18,7 @@ class Appel extends StatefulWidget {
 
 class _AppelState extends State<Appel> {
 
-  String adresse = '';
 
-  //la localisation
-
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // teste si la geolocation est desactivée
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return Future.error('La localisation est desactivée');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('La localisation a ete refusé');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, Nous ne pouvons pas avoir la permission.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-
-  }
-
-  Future<void> GetAdresseFromLonLat(Position position) async{
-
-    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
-
-    //print(placemark);
-    Placemark place = placemark[0];
-    adresse = '${place.country}';
-    print(adresse);
-  }
 
 
   List<Entite>? entites;

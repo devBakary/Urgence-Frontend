@@ -8,6 +8,7 @@ import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Screen/Contact_tile.dart';
 import 'package:urgence_projet/Service/ContactService.dart';
+import 'package:urgence_projet/global.dart';
 
 
 
@@ -23,11 +24,13 @@ class _HomescreenState extends State<Homescreen> {
 
    var id = 0;
    var value1 = 0;
+   int usId = 0;
 
 
   Future init() async {
     final prefs = await SharedPreferences.getInstance();
     value1 = prefs.getInt('id')!;
+    usId = prefs.getInt('id')!;
     if(value1 != null){
       this.id = value1;
       setState(() {
@@ -168,6 +171,22 @@ void _ouvrirTab(context){
    String contactEmail = "";
    String contactNumero = "";
    String contactAdresse = "";
+   int usId = usID;
+
+   /*Future get() async {
+     final prefs = await SharedPreferences.getInstance();
+     print('je suis iciiiiii');
+     usId = prefs.getInt('id')!;
+     print(usId);
+     print('je suis iciiiiii');
+
+     setState() {
+       usId = usId;
+     }
+
+     }*/
+
+
 
   showModalBottomSheet(context: context,
       isScrollControlled: true,
@@ -199,7 +218,7 @@ void _ouvrirTab(context){
 
                          InkWell(
                           onTap: (){
-                              Provider.of<ContactData>(context, listen: false).addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse);
+                              Provider.of<ContactData>(context, listen: false).addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse, usId);
                               Navigator.pop(context);
                               print('okkkk');
 

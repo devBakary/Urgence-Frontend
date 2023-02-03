@@ -7,6 +7,7 @@ import 'package:urgence_projet/Modele/Entite.dart';
 import 'package:urgence_projet/Modele/User.dart';
 import 'package:urgence_projet/Service/UserSecureStorage.dart';
 import 'package:urgence_projet/Service/globals.dart';
+import 'package:urgence_projet/global.dart';
 
 import '../Modele/mes gestes.dart';
 
@@ -16,7 +17,7 @@ import '../Modele/mes gestes.dart';
 class ContactServices{
 
   // ===== methode pour l'ajout des contact de l'utilisateur =========================
-  static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse) async{
+  static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse, int id) async{
     Map data = {
       "nom": nom,
       "prenom": prenom,
@@ -26,7 +27,7 @@ class ContactServices{
     };
 
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + "/contact/creer");
+    var url = Uri.parse(baseURL + "/contact/creer/$id");
 
     http.Response response = await http.post(url,
         headers: headers,
@@ -51,6 +52,7 @@ class ContactServices{
       var loginArr = json.decode(response.body);
       await UserSecureStorage.setId(loginArr['id']);
 
+      usID = loginArr['id'];
 
       final prefs=await SharedPreferences.getInstance();
       await prefs.setInt('id',loginArr['id']);
@@ -100,13 +102,13 @@ class ContactServices{
   }
 
 //======== methode pour envoyer la localisation=========
-  static Future<Localisation> location(String longitude, String latitude) async{
+  static Future<Localisation> location(double longitude, double latitude) async{
     Map data = {
-      "longitude" : longitude.toString(),
-      "latitude" : latitude.toString()
+      "longitude" : longitude,
+      "latitude" : latitude
     };
      
-    var body = json.encode(data);
+    var body = jsonEncode(data);
     var url = Uri.parse(baseURL + '/signale/creer');
 
     http.Response response = await http.post(url,
@@ -116,9 +118,12 @@ class ContactServices{
     Map responseMap = json.decode(response.body);
     print(response.body);
     print('ca marche ici');
+    print(response.body);
     Localisation localisation = Localisation.fromMap(responseMap);
-    print(localisation);
+    print(responseMap);
+    print("on est la");
     return localisation;
+
     
   }
   

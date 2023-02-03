@@ -1,4 +1,3 @@
-import 'package:urgence_projet/Modele/Entite.dart';
 
 class Entite{
   final int id;
@@ -24,20 +23,23 @@ class Entite{
 }
 
 class Localisation{
-  //final int id;
-  final String longitude;
-  final String latitude;
+  final int iduser;
+  final double longitude;
+  final double latitude;
+  final int id;
 
   Localisation({
-    //required this.id,
+    required this.id,
     required this.longitude,
-    required this.latitude
+    required this.latitude,
+    required this.iduser
 });
 
   factory Localisation.fromMap(Map localisationMap){
     return Localisation(
-        //id: localisationMap['id'],
+        id: localisationMap['id'],
         longitude: localisationMap['longitude'] ,
-        latitude: localisationMap['latitude']);
+        latitude: localisationMap['latitude'],
+        iduser: localisationMap['iduser']);
   }
 }
