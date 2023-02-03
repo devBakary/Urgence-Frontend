@@ -102,26 +102,21 @@ class ContactServices{
   }
 
 //======== methode pour envoyer la localisation=========
-  static Future<Localisation> location(double longitude, double latitude) async{
+  static Future<Localisation> location(double longitude, double latitude, int iduser, int id) async{
     Map data = {
       "longitude" : longitude,
       "latitude" : latitude
     };
      
     var body = jsonEncode(data);
-    var url = Uri.parse(baseURL + '/signale/creer');
+    var url = Uri.parse(baseURL + '/signale/creer/$iduser/$id');
 
     http.Response response = await http.post(url,
                                       headers: headers,
                                       body: body);
 
     Map responseMap = json.decode(response.body);
-    print(response.body);
-    print('ca marche ici');
-    print(response.body);
     Localisation localisation = Localisation.fromMap(responseMap);
-    print(responseMap);
-    print("on est la");
     return localisation;
 
     
@@ -164,12 +159,18 @@ class ContactServices{
       headers: headers,);
 
       List responseList = jsonDecode(response.body);
+
       List<Entite> entites = [];
       for (Map entiteMap in responseList){
         Entite entite = Entite.fromMap(entiteMap);
         entites.add(entite);
+
+        idE = entiteMap['id'];
+
       }
+
       return entites;
+
   }
 
   //================== recuperation de la liste des gestes ===========

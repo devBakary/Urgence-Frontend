@@ -71,9 +71,9 @@ class ContactData extends ChangeNotifier{
 
   List<Localisation> localisations = [];
 
-  void adresse(double locLongitude, double locLatitude) async{
+  void adresse(double locLongitude, double locLatitude, int user, int id) async{
 
-    Localisation localisation = await ContactServices.location(locLongitude, locLatitude);
+    Localisation localisation = await ContactServices.location(locLongitude, locLatitude, user, id);
     localisations.add(localisation);
     notifyListeners();
   }

@@ -4,3 +4,5 @@ int usID = 0;
 
 var lon ;
 var lat;
+
+var idE = 0;

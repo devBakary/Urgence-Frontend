@@ -158,7 +158,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                           IconButton(
                             icon: const Icon(Icons.add_alert, color: Colors.red,),
                             onPressed: (){
-                              Provider.of<ContactData>(context, listen: false).adresse(lon, lat);
+                              Provider.of<ContactData>(context, listen: false).adresse(lon, lat, usID, idE);
                                 Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Accueil()));
 
                             },
