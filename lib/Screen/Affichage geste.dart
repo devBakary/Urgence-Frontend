@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
+import 'package:urgence_projet/Screen/detail%20de%20secours.dart';
 
 import '../Modele/mes gestes.dart';
 
@@ -67,10 +68,14 @@ class GestesAffichage extends StatelessWidget {
                     border: Border.all(color: Color(0xFF85B6FF), width: 2),
                     shape: BoxShape.circle,
                   ),
-                  child: const Center(
-                      child: Icon(CupertinoIcons.right_chevron,
-                          size: 24,
-                          color: Color(0xFF85B6FF)
+                  child:  Center(
+                      child: IconButton(
+                        icon: Icon(CupertinoIcons.right_chevron,
+                            size: 24,
+                            color: Color(0xFF85B6FF)
+                        ), onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailsGeste(geste: geste)));
+                           },
                       )
                   ),
                 ),

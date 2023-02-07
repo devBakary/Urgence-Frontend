@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Modele/mes%20gestes.dart';
 
 class DetailsGeste extends StatefulWidget {
-  const DetailsGeste({Key? key}) : super(key: key);
+  const DetailsGeste({Key? key, required this.geste}) : super(key: key);
+
+  final Geste geste;
 
   @override
   State<DetailsGeste> createState() => _DetailsGesteState();
@@ -13,7 +16,7 @@ class _DetailsGesteState extends State<DetailsGeste> {
     return Scaffold(
       backgroundColor: Color(0xFFDEE3E8),
       appBar: AppBar(
-        title:  const Text("Geste de Secours ",
+        title:   Text(widget.geste.nom,
           style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -42,9 +45,9 @@ class _DetailsGesteState extends State<DetailsGeste> {
             child: Container(
               height: MediaQuery.of(context).size.height * .3,
               decoration:  BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage("assets/images/b.jpg"),
-                    fit: BoxFit.cover
+                image:  DecorationImage(
+                    image: AssetImage("assets/images/${widget.geste.img2}"),
+                    fit: BoxFit.fill
                 ),
               borderRadius: BorderRadius.circular(12)
               ),
@@ -60,9 +63,28 @@ class _DetailsGesteState extends State<DetailsGeste> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: MediaQuery.of(context).size.height * .3,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(15),
                 decoration:  BoxDecoration(
-                    color: Colors.amber,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(12)
+                ),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.geste.nom, style: TextStyle(fontSize: 28),),
+                    const Divider(
+                      height: 5,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    Text(widget.geste.description, style: TextStyle(fontSize: 20)),
+
+                  ],
                 ),
               ),
             ),
