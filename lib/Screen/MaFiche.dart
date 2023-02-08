@@ -5,6 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 
 import '../Modele/Contact_data.dart';
+import '../Modele/Fiche.dart';
+import '../Service/FicheService.dart';
+import '../global.dart';
 
 class MaFiche extends StatefulWidget {
   const MaFiche({Key? key}) : super(key: key);
@@ -15,32 +18,57 @@ class MaFiche extends StatefulWidget {
 
 class _MaFicheState extends State<MaFiche> {
 
+  List<Fiche> fiches = [];
+
   String ficheNom = '';
   String fichePrenom = '';
   String ficheAllergie = '';
   String ficheGroupe = '';
-  int usId = 0;
+  String ficheAdresse = "";
+  //int usId = 0;
 
-  Future init() async {
+  String noms= '';
+  String prenom = '';
+  String allergie= '';
+  String groupe = '';
+
+  /*Future init() async {
     final prefs = await SharedPreferences.getInstance();
-    usId = prefs.getInt('id')!;
+    //usId = prefs.getInt('id')!;
+    noms = prefs.getString('nom')!;
+    prenom = prefs.getString('prenom')!;
+    groupe = prefs.getString('groupe')!;
     print("ici");
-    print(usId);
+    print(noms);
     print("ici");
       setState(() {
 
       });
-    }
+    getContact();
+    }*/
+  getContact() async{
+    fiches = await FichesServices.getfiche(usID);
+    Provider.of<ContactData>(context, listen: false).fiches = fiches!;
+    setState(() { });
+  }
 
   @override
   void initState(){
     super.initState();
-    init();
+    getContact();
+    idl;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return fiches == null?
+    const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    )
+
+    :Scaffold(
       appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
@@ -56,7 +84,7 @@ class _MaFicheState extends State<MaFiche> {
       ),
 
 
-          title: const Text("Ma fiche",
+          title:  const Text('Ma Fiche',
           style: TextStyle(fontSize: 24,
           fontWeight: FontWeight.bold,
           color: Colors.white),
@@ -67,7 +95,7 @@ class _MaFicheState extends State<MaFiche> {
           // Premier bouton
           InkWell(
             onTap: (){
-              Provider.of<ContactData>(context, listen: false).addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, usId);
+              Provider.of<ContactData>(context, listen: false).addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
               print('ookk');
               },
            child:  Container(
@@ -97,12 +125,14 @@ class _MaFicheState extends State<MaFiche> {
               ),
 
               child: Column(
-                children: const [
-                  Center(
+                children:  [
+                 const Center(
                     child: Icon(CupertinoIcons.person_crop_circle_fill, size: 90, color: Colors.white,),
                   ),
 
-                  Text("Bakary Diakite",
+                  Text(
+
+                    fnom != null ? '$fnom' : '',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ],
@@ -142,8 +172,43 @@ class _MaFicheState extends State<MaFiche> {
                            onChanged: (val){
                              ficheNom = val;
                            },
-                           decoration: const InputDecoration(
-                               hintText: 'Nom',
+                           decoration: InputDecoration(
+                               hintText: fnom != null ? '$fnom' : 'nom',
+                               hintStyle: TextStyle(color: Colors.blueAccent),
+                               border: InputBorder.none
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                 ),
+                 SizedBox(
+                   height: MediaQuery.of(context).size.height * .02,
+                 ),
+                 Padding(
+                   padding: const EdgeInsets.only(left: 5, right: 5),
+                   child: Container(
+                     width: double.infinity,
+                     padding: EdgeInsets.all(8),
+                     decoration: const BoxDecoration(
+                         color: Color(0xFFDEE3E8),
+                         borderRadius: BorderRadius.all(Radius.circular(8.0),
+                         )
+                     ),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         const Text("Prenom",
+                           style: TextStyle(fontSize: 17,
+                               color: Colors.black),
+                         ),
+
+                         TextFormField(
+                           onChanged: (val){
+                             fichePrenom = val;
+                           },
+                           decoration: InputDecoration(
+                               hintText: prenoms != null ? '$prenoms' : 'prenom',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),
@@ -170,17 +235,17 @@ class _MaFicheState extends State<MaFiche> {
                      child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
-                         const Text("Prenom",
+                         const Text("Adresse",
                            style: TextStyle(fontSize: 17,
                                color: Colors.black),
                          ),
 
                          TextFormField(
                            onChanged: (val){
-                             fichePrenom = val;
+                             ficheAdresse = val;
                            },
-                           decoration: const InputDecoration(
-                               hintText: '20 Novembre',
+                           decoration: InputDecoration(
+                               hintText: adresses != null ? '$adresses' : 'adresse',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),
@@ -216,8 +281,8 @@ class _MaFicheState extends State<MaFiche> {
                            onChanged: (val){
                              ficheAllergie = val;
                            },
-                           decoration: const InputDecoration(
-                               hintText: 'Kalaban',
+                           decoration: InputDecoration(
+                               hintText: allergies != null ? '$allergies' : 'allergie',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),
@@ -254,8 +319,8 @@ class _MaFicheState extends State<MaFiche> {
                            onChanged: (val){
                              ficheGroupe= val;
                            },
-                           decoration: const InputDecoration(
-                               hintText: 'Kalaban',
+                           decoration: InputDecoration(
+                               hintText: groupes != null ? '$groupes' : 'groupe sanguin',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),

@@ -45,9 +45,9 @@ class ContactData extends ChangeNotifier{
   }
 
   //la methode pour s'inscrire
-  void addFiche(String ficheNom, String fichePrenom, String ficheAllergie, String ficheGroupe, int usId) async {
+  void addFiche(String ficheNom, String fichePrenom, String ficheAllergie, String ficheGroupe, String ficheAdresse, int idl) async {
 
-    Fiche fiche = await FichesServices.addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, usId);
+    Fiche fiche = await FichesServices.addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
 
     fiches.add(fiche);
     notifyListeners();

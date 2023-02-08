@@ -100,7 +100,7 @@ class _AccueilState extends State<Accueil> {
               ),
 
               centerTitle: true,
-              backgroundColor: Color(0xFFD42125),
+              backgroundColor: Colors.blue,
             ),
 
             body: Container(

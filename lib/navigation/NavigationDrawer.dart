@@ -6,8 +6,10 @@ import 'package:urgence_projet/Screen/PageAide.dart';
 
 import '../Screen/About.dart';
 import '../Screen/Accueil.dart';
+import '../Screen/Connexions.dart';
 import '../Screen/Geste de secours.dart';
 import '../Screen/test.dart';
+import '../global.dart';
 import 'drawer item.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -116,10 +118,17 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               onPressed: ()=>onItemPressed(context, index: 6),
             ),
 
-            SizedBox(height: MediaQuery.of(context).size.height * .05 ,),
+            SizedBox(height: MediaQuery.of(context).size.height * .015 ,),
+            DrawerItem(name: 'Deconnexion',
+              icon: Icons.logout,
+              onPressed: ()=>onItemPressed(context, index: 7),
+            ),
+
+           // SizedBox(height: MediaQuery.of(context).size.height * .05 ,),
             Expanded(
 
-                child: Text("Nos politiques de confidentialites", style: TextStyle(fontSize: 20),)
+                child: Center(
+                    child: Text("Nos politiques de confidentialites", style: TextStyle(fontSize: 20),))
             )
           ],
         ),
@@ -160,6 +169,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         Navigator.push(context, MaterialPageRoute(builder: (_) => Apropos()));
         break;
 
+      case 7 :
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Connexions()));
+        break;
+
       default:
         Navigator.pop(context);
         break;
@@ -183,7 +196,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             ),
           ),
           const SizedBox(width: 20,),
-          const Text('My name', style: TextStyle(fontSize: 24, color: Colors.white),),
+           Text('${username}', style: TextStyle(fontSize: 24, color: Colors.white),),
         ],
       ),
     );

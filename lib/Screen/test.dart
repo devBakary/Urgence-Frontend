@@ -290,6 +290,7 @@ void _ouvrirTab(context){
                     onChanged: (val){
                       contactNumero = val;
                     },
+
                     decoration: const InputDecoration(
                         hintText: 'numéro',
                         border: UnderlineInputBorder()

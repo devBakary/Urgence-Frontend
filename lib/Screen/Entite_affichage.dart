@@ -92,7 +92,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
     final value=prefs.getInt('locLongitude');
     final value1=prefs.getInt('locLatitude');*/
     setState(() {
-
+      GetAdresseFromLonLat(position);
     });
   }
 

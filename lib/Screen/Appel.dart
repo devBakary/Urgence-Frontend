@@ -47,13 +47,13 @@ class _AppelState extends State<Appel> {
       :Scaffold(
       appBar: AppBar(
 
-        title:  Text('Example Clients (${Provider.of<ContactData>(context).entite.length})',
-          style: const TextStyle(fontSize: 24,
+        title:  const Text('Appel d\'Urgence ',
+          style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
       ),
 
       body: Container(
