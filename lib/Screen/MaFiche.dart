@@ -169,8 +169,8 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (val){
-                             ficheNom = val;
+                           onChanged: (fnom){
+                             ficheNom = fnom ;
                            },
                            decoration: InputDecoration(
                                hintText: fnom != null ? '$fnom' : 'nom',
