@@ -58,8 +58,8 @@ class _GesteSecoursState extends State<GesteSecours> {
         ),
 
 
-        title:  Text("Geste de Secours (${Provider.of<ContactData>(context).gestes.length})",
-          style: const TextStyle(fontSize: 24,
+        title:  const Text("Geste de Secours",
+          style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white),
         ),

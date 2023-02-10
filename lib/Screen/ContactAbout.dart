@@ -1,10 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
+import 'package:urgence_projet/Screen/test.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+Future<void> makeCall(String url) async{
+  if(await canLaunch(url)){
+    await launch(url);
+  }
+  else{
+    throw "Nous ne pouvons pas lancer l'appel sur $url";
+  }
+}
 
 class ContactAbout extends StatefulWidget {
-  const ContactAbout({Key? key}) : super(key: key);
+  const ContactAbout({Key? key, required this.contact}) : super(key: key);
+
+  final Contact contact;
 
   @override
   State<ContactAbout> createState() => _ContactAboutState();
@@ -29,7 +42,7 @@ class _ContactAboutState extends State<ContactAbout> {
                      size: 35,),
 
                    onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => ContactUrgent(),),);
+                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => Homescreen(),),);
                    },
                  );
                },
@@ -52,7 +65,7 @@ class _ContactAboutState extends State<ContactAbout> {
             expandedHeight: 200,
             floating: false,
             pinned: true,
-             title: Text("Bakary Diakite"),
+             title: Text(widget.contact.prenom + " " + widget.contact.nom),
              centerTitle: true,
 
 
@@ -111,7 +124,7 @@ class _ContactAboutState extends State<ContactAbout> {
 
                                       child: InkWell(
                                         onTap: (){
-
+                                          makeCall('tel:223${widget.contact.numero}');
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
@@ -137,7 +150,7 @@ class _ContactAboutState extends State<ContactAbout> {
 
                                       child: InkWell(
                                         onTap: (){
-
+                                          makeCall('sms:223${widget.contact.numero}');
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
@@ -164,7 +177,7 @@ class _ContactAboutState extends State<ContactAbout> {
 
                                       child: InkWell(
                                         onTap: (){
-
+                                          widget.contact.email != null? makeCall('mailto:223${widget.contact.email}') : null;
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
@@ -220,8 +233,8 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: '90675432',
+                      decoration:  InputDecoration(
+                          hintText: '${widget.contact.numero}',
                           hintStyle: TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),
@@ -254,9 +267,9 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: '90675432',
-                          hintStyle: TextStyle(color: Colors.blueAccent),
+                      decoration:  InputDecoration(
+                          hintText: widget.contact.nom,
+                          hintStyle: const TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),
                     ),
@@ -288,8 +301,8 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: '90675432',
+                      decoration:  InputDecoration(
+                          hintText: widget.contact.prenom,
                           hintStyle: TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),
@@ -322,8 +335,8 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: '90675432',
+                      decoration:  InputDecoration(
+                          hintText: widget.contact.email != null ? widget.contact.email : "email",
                           hintStyle: TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),

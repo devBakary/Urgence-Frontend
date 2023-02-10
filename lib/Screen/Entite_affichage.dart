@@ -152,7 +152,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                             icon: const Icon(Icons.call, color: Colors.red,),
                             onPressed: (){
                               print(widget.entite.numero);
-                              makeCall('tel: ${widget.entite.numero}');
+                              makeCall('tel:223${widget.entite.numero}');
                               },
                           ),
                           IconButton(

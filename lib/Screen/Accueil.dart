@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
@@ -15,6 +16,8 @@ import 'package:urgence_projet/Screen/test.dart';
 import 'package:urgence_projet/Screen/video.dart';
 import 'package:urgence_projet/navigation/NavigationDrawer.dart';
 
+import 'package:just_audio/just_audio.dart';
+
 import 'Geste de secours.dart';
 
 class Accueil extends StatefulWidget {
@@ -26,48 +29,15 @@ class Accueil extends StatefulWidget {
 
 class _AccueilState extends State<Accueil> {
 
-  String adresse = '';
 
-  //la localisation
+  final _player = AudioPlayer();
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // teste si la geolocation est desactivée
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return Future.error('La localisation est desactivée');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('La localisation a ete refusé');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, Nous ne pouvons pas avoir la permission.');
-    }
-
-    return await Geolocator.getCurrentPosition();
+  @override
+  void initState() {
+    super.initState();
 
   }
 
-  Future<void> GetAdresseFromLonLat(Position position) async{
-
-    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
-    
-    print(placemark);
-    Placemark place = placemark[0];
-    adresse = '${place.country}';
-    print(adresse);
-  }
 
 
   @override
@@ -111,16 +81,11 @@ class _AccueilState extends State<Accueil> {
                     color: Colors.green,
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * .25,
-                    child: ElevatedButton(onPressed: () async {
-                      Position position = await _determinePosition();
-                      print(position.latitude);
-                      print(position.longitude);
-                      GetAdresseFromLonLat(position);
-
-                      setState(() {
-
-                      });
-                    },
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await _player.setAsset('assets/msic.mp3');
+                        _player.play();
+                      },
                       child: Text("avoir la loc"),
 
                     ),

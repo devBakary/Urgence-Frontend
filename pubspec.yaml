@@ -44,6 +44,9 @@ dependencies:
   url_launcher: ^6.1.7
   flutter_secure_storage: ^7.0.1
   shared_preferences: ^2.0.17
+  carousel_slider: ^4.2.1
+  audioplayers: ^3.0.1
+  just_audio: ^0.9.31
 
 dev_dependencies:
   flutter_test:

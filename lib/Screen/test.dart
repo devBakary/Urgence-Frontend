@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/Contact_tile.dart';
 import 'package:urgence_projet/Service/ContactService.dart';
 import 'package:urgence_projet/global.dart';
@@ -86,6 +87,19 @@ class _HomescreenState extends State<Homescreen> {
       appBar: AppBar(
         title: const Text(
             "Mes Contact"),
+
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(CupertinoIcons.back,
+                size: 35,),
+
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => Accueil(),),);
+              },
+            );
+          },
+        ),
             centerTitle: true,
         backgroundColor: Colors.blue,
       ),

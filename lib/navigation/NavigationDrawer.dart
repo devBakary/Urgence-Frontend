@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
+import 'package:urgence_projet/Screen/mon%20profil.dart';
 
 import '../Screen/About.dart';
 import '../Screen/Accueil.dart';
@@ -180,24 +181,27 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Widget headerWidget(){
-    return Container(
-      padding: EdgeInsets.all(10),
-      color: const Color(0xFF0054E0),
-      child: Column(
-        children:  [
-          Container(
-            width: double.infinity,
-            height: 120,
-            padding: EdgeInsets.all(10),
+    return InkWell(
+      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfilPage())),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        color: const Color(0xFF0054E0),
+        child: Column(
+          children:  [
+            Container(
+              width: double.infinity,
+              height: 120,
+              padding: EdgeInsets.all(10),
 
-            child: const CircleAvatar(
-              radius: 40,
-              //backgroundImage: Image.asset(name)
+              child: const CircleAvatar(
+                radius: 40,
+                //backgroundImage: Image.asset(name)
+              ),
             ),
-          ),
-          const SizedBox(width: 20,),
-           Text('${username}', style: TextStyle(fontSize: 24, color: Colors.white),),
-        ],
+            const SizedBox(width: 20,),
+             Text('${username}', style: TextStyle(fontSize: 24, color: Colors.white),),
+          ],
+        ),
       ),
     );
   }
