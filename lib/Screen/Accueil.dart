@@ -32,6 +32,8 @@ class _AccueilState extends State<Accueil> {
 
   final _player = AudioPlayer();
 
+  bool play = true;
+
   @override
   void initState() {
     super.initState();
@@ -82,9 +84,20 @@ class _AccueilState extends State<Accueil> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * .25,
                     child: ElevatedButton(
+
                       onPressed: () async {
-                        await _player.setAsset('assets/msic.mp3');
-                        _player.play();
+                        await _player.setAsset('assets/audios/msic.mp3');
+                        setState(() {
+                          play = !play;
+                        });
+                        if(play){
+                          _player.play();
+                        }
+                        else{
+                          _player.stop();
+                        }
+
+
                       },
                       child: Text("avoir la loc"),
 
