@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/video.dart';
+import 'package:urgence_projet/Screen/widget.dart';
 import 'package:video_player/video_player.dart';
 //import 'package:video_player/video_player.dart';
 
@@ -72,37 +73,7 @@ class Aide extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20,),
-
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white
-                          ),
-                          child: Row(
-                            children:  [
-                              Icon(CupertinoIcons.question_circle, size: 26, color: Color(0xFF0054E0),),
-
-                              SizedBox(width: 4,),
-
-                              Text("Lire une video", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-
-                              Expanded(
-                                  child: IconButton(
-                                      alignment: Alignment.centerRight,
-                                      onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>VideoPlayerScreen()));
-                                      },
-                                      icon: Icon(CupertinoIcons.right_chevron, size: 24, color: Color(0xFF0054E0))
-                                  )
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      Testes(),
 
                     ],
                   ),

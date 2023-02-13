@@ -15,6 +15,7 @@ import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/detail%20de%20secours.dart';
 import 'package:urgence_projet/Screen/test.dart';
 import 'package:urgence_projet/Screen/video.dart';
+import 'package:urgence_projet/Screen/widget.dart';
 import 'package:urgence_projet/navigation/NavigationDrawer.dart';
 
 import 'package:just_audio/just_audio.dart';
@@ -169,7 +170,7 @@ class _AccueilState extends State<Accueil> {
 
                                 child: InkWell(
                                   onTap: (){
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Homescreen()));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Testes()));
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
