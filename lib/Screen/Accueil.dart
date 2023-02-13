@@ -1,4 +1,5 @@
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
@@ -40,6 +41,15 @@ class _AccueilState extends State<Accueil> {
 
   }
 
+  //liste de mes items
+  final List<String> images = [
+
+    "assets/images/imgee.jpg",
+    "assets/images/imgee.jpg",
+    "assets/images/ggg.png",
+    "assets/images/loggo.png",
+  ];
+
 
 
   @override
@@ -77,34 +87,33 @@ class _AccueilState extends State<Accueil> {
 
             body: Container(
 
+
               child: Column(
                 children:  [
+
                   Container(
-                    color: Colors.green,
+                    color: Colors.blue,
+                    margin: EdgeInsets.only(top: 2),
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * .25,
-                    child: ElevatedButton(
-
-                      onPressed: () async {
-                        await _player.setAsset('assets/audios/msic.mp3');
-                        setState(() {
-                          play = !play;
-                        });
-                        if(play){
-                          _player.play();
-                        }
-                        else{
-                          _player.stop();
-                        }
-
-
-                      },
-                      child: Text("avoir la loc"),
-
-                    ),
+                    child: CarouselSlider(
+                      items: images.map((item)=>Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * .25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red
+                        ),
+                        child: Image.asset(item, fit: BoxFit.cover,
+                        ),
+                      )).toList(),
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 2,
+                        enlargeCenterPage: true
+                      ),
+                    )
                   ),
-
-
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .05,
                   ),

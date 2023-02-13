@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgence_projet/Screen/Accueil.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _ProfilPageState extends State<ProfilPage> {
             height: MediaQuery.of(context).size.height * .40,
             width: double.infinity,
             decoration: const BoxDecoration(
-              color: Colors.red,
+              color: Color(0xFF0054E0),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -30,14 +31,29 @@ class _ProfilPageState extends State<ProfilPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.only(top: 35, right: 15, left: 15),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children:  [
+                        ClipOval(
+                          child: Container(
+                            color: Colors.white,
+                            child: IconButton(
+                              alignment: AlignmentDirectional.topEnd,
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Accueil()));
+                                },
+                              icon: Icon(CupertinoIcons.reply_thick_solid, color: Colors.black, size: 28,),
+                            ),
+                          ),
+                        ),
+
                         IconButton(
                           alignment: AlignmentDirectional.topEnd,
                             onPressed: (){null;},
-                            icon: Icon(Icons.settings, color: Colors.white, size: 32,))
+                            icon: Icon(Icons.settings, color: Colors.white, size: 32,),
+                        ),
+
                       ],
                     ),
                 ),
