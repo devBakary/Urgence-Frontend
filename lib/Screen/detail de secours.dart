@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Modele/mes%20gestes.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DetailsGeste extends StatefulWidget {
   const DetailsGeste({Key? key, required this.geste}) : super(key: key);
@@ -11,13 +12,33 @@ class DetailsGeste extends StatefulWidget {
 }
 
 class _DetailsGesteState extends State<DetailsGeste> {
+   late final  videoURL ;
+
+  late YoutubePlayerController _controller;
+
+  void lire(){
+    final videoID = YoutubePlayer.convertUrlToId(videoURL);
+    _controller = YoutubePlayerController(initialVideoId: videoID!,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+        )
+    );
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    videoURL = "https://www.youtube.com/watch?v=helEv0kGHd4&list=RDla63LVk5ZWU&index=26"; // set the videoURL variable to the video URL of the current gesture
+    lire(); // call the lire() method to create the YoutubePlayerController
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFDEE3E8),
       appBar: AppBar(
         title:   Text(widget.geste.nom,
-          style: TextStyle(fontSize: 24,
+          style: const TextStyle(fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white),
         ),
@@ -45,11 +66,14 @@ class _DetailsGesteState extends State<DetailsGeste> {
             child: Container(
               height: MediaQuery.of(context).size.height * .3,
               decoration:  BoxDecoration(
-                image:  DecorationImage(
-                    image: AssetImage("assets/images/${widget.geste.img2}"),
+                /*image:  DecorationImage(
+                    image: AssetImage(videoURL = "https://www.youtube.com/watch?v=helEv0kGHd4&list=RDla63LVk5ZWU&index=26"),
                     fit: BoxFit.fill
-                ),
+                ),*/
               borderRadius: BorderRadius.circular(12)
+              ),
+              child: YoutubePlayer(controller: _controller,
+                showVideoProgressIndicator: true,
               ),
             ),
           ),

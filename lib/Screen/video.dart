@@ -1,105 +1,37 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoPlayerScreen extends StatefulWidget {
+class YoutubePlayers extends StatefulWidget {
+  const YoutubePlayers({Key? key}) : super(key: key);
+
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  State<YoutubePlayers> createState() => _YoutubePlayersState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  double _volume = 1.0;
-  double _playbackSpeed = 1.0;
+class _YoutubePlayersState extends State<YoutubePlayers> {
+    final videoURL = "https://www.youtube.com/watch?v=helEv0kGHd4&list=RDla63LVk5ZWU&index=26";
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset('assets/videos/Accueil.mp4')
-      ..initialize().then((_) {
-        setState(() {});
-      });
-  }
+    late YoutubePlayerController _controller;
+
+    @override
+    void initState() {
+      super.initState();
+      final videoID = YoutubePlayer.convertUrlToId(videoURL);
+      _controller = YoutubePlayerController(initialVideoId: videoID!,
+            flags: YoutubePlayerFlags(
+              autoPlay: false,
+            )
+      );
+    }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-          //height: 1000,
-          child: Column(
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-
-                child: VideoPlayer(_controller),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: <Widget>[
-                    VideoProgressIndicator(
-                      _controller,
-                      allowScrubbing: true,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: IconButton(
-                            icon: const Icon(Icons.volume_down),
-                            onPressed: () {
-                              setState(() {
-                                _volume -= 0.1;
-                                _controller.setVolume(_volume);
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: IconButton(
-                            icon: const Icon(Icons.volume_up),
-                            onPressed: () {
-                              setState(() {
-                                _volume += 0.1;
-                                _controller.setVolume(_volume);
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child:  FloatingActionButton(
-                            backgroundColor: null,
-                            onPressed: () {
-
-                                setState(() {
-                                  _controller.value.isPlaying
-                                  ? _controller.pause()
-                                      : _controller.play();
-                                });
-                            },
-                            child: Icon(
-                            _controller.value.isPlaying ? CupertinoIcons.pause_circle : CupertinoIcons.play,
-                              ),
-                            ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    return Column(
+      children: [
+        YoutubePlayer(controller: _controller,
+              showVideoProgressIndicator: true,
         ),
+      ],
     );
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
 }
-
-
-
-
-

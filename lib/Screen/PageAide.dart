@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/video.dart';
-import 'package:urgence_projet/Screen/widget.dart';
+import 'package:urgence_projet/Screen/tutoriel.dart';
 import 'package:video_player/video_player.dart';
 //import 'package:video_player/video_player.dart';
 
@@ -73,7 +73,7 @@ class Aide extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20,),
-                      Testes(),
+                      VideoPlayers(),
 
                     ],
                   ),

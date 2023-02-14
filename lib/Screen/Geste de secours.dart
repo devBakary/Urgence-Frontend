@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,15 @@ class GesteSecours extends StatefulWidget {
 class _GesteSecoursState extends State<GesteSecours> {
 
   List<Geste>? gestes;
+
+  //liste de mes items
+  final List<String> images = [
+
+    "assets/images/imgee.jpg",
+    "assets/images/imgee.jpg",
+    "assets/images/ggg.png",
+    "assets/images/loggo.png",
+  ];
 
   getGeste() async {
     gestes = await ContactServices.getGeste();
@@ -81,11 +91,26 @@ class _GesteSecoursState extends State<GesteSecours> {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * .25,
-              color: Colors.amber,
+          Container(
+            height: MediaQuery.of(context).size.height * .25,
+            width: double.infinity,
+            //color: Colors.amber,
+            child: CarouselSlider(
+              items: images.map((item)=>Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * .25,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.red
+                ),
+                child: Image.asset(item, fit: BoxFit.cover,
+                ),
+              )).toList(),
+              options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2,
+                  enlargeCenterPage: true
+              ),
             ),
           ),
 
