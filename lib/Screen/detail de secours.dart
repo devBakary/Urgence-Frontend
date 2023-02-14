@@ -74,6 +74,16 @@ class _DetailsGesteState extends State<DetailsGeste> {
               ),
               child: YoutubePlayer(controller: _controller,
                 showVideoProgressIndicator: true,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(
+                    isExpanded: true,
+                    colors: const ProgressBarColors(
+                      playedColor: Colors.blue,
+                      handleColor: Colors.amber
+                    ),
+                  )
+                ],
               ),
             ),
           ),

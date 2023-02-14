@@ -58,7 +58,7 @@ class _HomescreenState extends State<Homescreen> {
   logout() async{
     final prefs = await SharedPreferences.getInstance();
     final success = await prefs.remove('id');
-    print("ca marche");
+    //print("ca marche");
     setState(() {
       success;
     });
@@ -186,21 +186,7 @@ void _ouvrirTab(context){
    String contactNumero = "";
    String contactAdresse = "";
    int usId = usID;
-
-   /*Future get() async {
-     final prefs = await SharedPreferences.getInstance();
-     print('je suis iciiiiii');
-     usId = prefs.getInt('id')!;
-     print(usId);
-     print('je suis iciiiiii');
-
-     setState() {
-       usId = usId;
-     }
-
-     }*/
-
-
+   var errorMessage;
 
   showModalBottomSheet(context: context,
       isScrollControlled: true,
@@ -232,9 +218,15 @@ void _ouvrirTab(context){
 
                          InkWell(
                           onTap: (){
+                            if(contactNumero.isEmpty){
+                                errorMessage = 'Le champ de saisie ne peut pas être vide';
+                            }
+                            else{
                               Provider.of<ContactData>(context, listen: false).addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse, usId);
                               Navigator.pop(context);
                               print('okkkk');
+                            }
+
 
                           },
                           child: const Text("OK", style: TextStyle(fontSize: 24,
@@ -304,13 +296,19 @@ void _ouvrirTab(context){
                     onChanged: (val){
                       contactNumero = val;
                     },
-
+                    keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
-                        hintText: 'numéro',
-                        border: UnderlineInputBorder()
+                      hintText: 'numero',
+                      border: UnderlineInputBorder(),
                     ),
                   ),
                 ),
+                if (errorMessage != null)
+                  Text(
+                    errorMessage,
+                    style: TextStyle(color: Colors.red),
+                  ),
+
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: TextFormField(
