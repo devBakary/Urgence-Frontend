@@ -206,7 +206,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              fichePrenom = val;
+
                            },
+
                            decoration: InputDecoration(
                                hintText: prenoms != null ? '$prenoms' : 'prenom',
                                hintStyle: TextStyle(color: Colors.blueAccent),

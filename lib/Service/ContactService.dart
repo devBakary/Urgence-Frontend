@@ -42,7 +42,7 @@ class ContactServices{
 
 
   //==================== Pour l'authentification = ================
-  Future<http.Response> login(String username, String password) async {
+  /*Future<http.Response> login(String username, String password) async {
     Map data = {'username': username, 'password': password};
     var body = jsonEncode(data);
     var url = Uri.parse(baseURL + "/auth/connexion");
@@ -50,25 +50,54 @@ class ContactServices{
 
     if (response.statusCode == 200) {
       var loginArr = json.decode(response.body);
-      await UserSecureStorage.setId(loginArr['id']);
-
       print(loginArr);
-
       usID = loginArr['id'];
       username = loginArr['username'];
-      print(usID);
-
       final prefs=await SharedPreferences.getInstance();
       await prefs.setInt('id',loginArr['id']);
-      final value=prefs.getInt('id');
+      logged = true;
 
     } else {
+      logged = false;
       print('login Error');
     }
 
     return response;
 
+  }*/
+
+
+
+  // ...
+
+  Future<bool> login(String username, String password) async {
+    Map data = {'username': username, 'password': password};
+      var body = jsonEncode(data);
+      var url = Uri.parse(baseURL + "/auth/connexion");
+       http.Response response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 200) {
+         var loginArr = json.decode(response.body);
+          print(loginArr);
+          usID = loginArr['id'];
+          username = loginArr['username'];
+          final prefs=await SharedPreferences.getInstance();
+          await prefs.setInt('id',loginArr['id']);
+          logged = true;
+
+          return true; // Connexion réussie
+      }
+      else {
+        logged = false;
+        print('login Error');
+        throw Exception('Nom d\'utilisateur ou mot de passe incorrect'); // Connexion échouée
+      }
   }
+
+  // ...
+
+
+
   //========= fin de la partie de l'authentification================
 
 

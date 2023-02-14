@@ -69,6 +69,7 @@ class _AppelState extends State<Appel> {
                   color: Color(0xFFDEE3E8),
                   borderRadius: BorderRadius.circular(10),
                 ),
+
               ),
             ),
 
