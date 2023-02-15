@@ -36,11 +36,11 @@ class ContactData extends ChangeNotifier{
   }
 
   //la methode pour s'inscrire
-  void inscriptionUser(String userUsername, String userEmail, String userNumero, String userAdresse, String userPassword) async {
+   inscriptionUser(String userUsername, String userNumero, String userAdresse, String userPassword) async {
 
-    Users user = await ContactServices.inscriprtion(userUsername, userEmail, userNumero, userAdresse, userPassword);
+    Users? user = await ContactServices.inscriprtion(userUsername, userNumero, userAdresse, userPassword);
 
-    users.add(user);
+    users.add(user!);
     notifyListeners();
   }
 

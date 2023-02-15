@@ -1,8 +1,8 @@
 class Users{
   final int id;
   final String username;
-  final String email;
-  final String adresse;
+  final String? email;
+  final String? adresse;
   final String numero;
   final String password;
 

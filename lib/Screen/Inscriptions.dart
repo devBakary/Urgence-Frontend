@@ -16,11 +16,13 @@ class Inscriptions extends StatefulWidget {
 
 class _InscriptionsState extends State<Inscriptions> {
 
-  String userUsername = '';
-  String userEmail = '';
-  String userNumero = '';
-  String userAdresse = '';
-  String userPassword = '';
+  final formkey = GlobalKey<FormState>();
+
+  TextEditingController userUsername= TextEditingController();
+  TextEditingController userEmail= TextEditingController();
+  TextEditingController userNumero= TextEditingController();
+  TextEditingController userAdresse= TextEditingController();
+  TextEditingController userPassword = TextEditingController();
 
   bool _obscureText = true;
   @override
@@ -67,199 +69,217 @@ class _InscriptionsState extends State<Inscriptions> {
                             topRight: Radius.circular(45))
                     ),
 
-                    child: Column(
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * .60,
-                          padding: const EdgeInsets.all(20.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(height: MediaQuery.of(context).size.height * .04,),
-                                TextField(
-                                    onChanged: (val){
-                                    userUsername = val;
+                    child: Form(
+                      key: formkey,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * .60,
+                            padding: const EdgeInsets.all(20.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: MediaQuery.of(context).size.height * .04,),
+                                  TextFormField(
+                                    controller: userUsername,
+                                    validator: (value){
+                                      if(value!.isEmpty){
+                                        return " Le nom d'utilisateur est obligatoire ! ";
+                                      }else if(value.length < 3){
+                                        return "le nom d'utilisateur doit contenir au minimum (3) caractères !";
+                                      }
+                                      return null;
                                     },
-                                  decoration: InputDecoration(
-                                      labelText: 'Nom d\'utilisateur',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0xFFe7edeb),
-                                      hintText: 'Nom d\'utilisateur',
-                                      hintStyle: const TextStyle(
-                                          fontSize: 18
-                                      ),
-                                      prefixIcon: Icon(Icons.person, color: Colors.blueGrey, size: 30,)
+                                    decoration: InputDecoration(
+                                        labelText: 'Nom d\'utilisateur *',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        filled: true,
+                                        fillColor: Color(0xFFe7edeb),
+                                        hintText: 'Nom d\'utilisateur',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 18
+                                        ),
+                                        prefixIcon: Icon(Icons.person, color: Colors.blueGrey, size: 30,)
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                                  SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-
-                                //email
-                                TextField(
-                                  onChanged: (val){
-                                  userEmail = val;
-                                  },
-                                  decoration: InputDecoration(
-                                      labelText: 'Email',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0xFFe7edeb),
-                                      hintText: 'Email',
-                                      hintStyle: const TextStyle(
-                                          fontSize: 18
-                                      ),
-                                      prefixIcon: Icon(CupertinoIcons.mail_solid, color: Colors.blueGrey, size: 30,)
+                                  //numero
+                                  TextFormField(
+                                    keyboardType: TextInputType.phone,
+                                    controller: userNumero,
+                                    validator: (value){
+                                      if(value!.isEmpty){
+                                        return " Le numero est obligatoire !";
+                                      }else if(value.length != 8){
+                                        return " Le format incorrect, veuillez entrer les (8) chiffres !";
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                        labelText: 'Numero *',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        filled: true,
+                                        fillColor: Color(0xFFe7edeb),
+                                        hintText: 'Numero de telephone *',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 18
+                                        ),
+                                        prefixIcon: Icon(CupertinoIcons.phone, color: Colors.blueGrey, size: 30,)
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                                  SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-                                //numero
-                                TextField(
-                                  onChanged: (val){
-                                  userNumero = val;
-                                  },
-                                  decoration: InputDecoration(
-                                      labelText: 'Numero',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0xFFe7edeb),
-                                      hintText: 'Numero',
-                                      hintStyle: const TextStyle(
-                                          fontSize: 18
-                                      ),
-                                      prefixIcon: Icon(CupertinoIcons.phone, color: Colors.blueGrey, size: 30,)
+                                  //adresse
+                                  TextFormField(
+                                    controller: userAdresse,
+                                    decoration: InputDecoration(
+                                        labelText: 'Adresse',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        filled: true,
+                                        fillColor: Color(0xFFe7edeb),
+                                        hintText: 'Adresse',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 18
+                                        ),
+                                        prefixIcon: Icon(CupertinoIcons.location, color: Colors.blueGrey, size: 30,)
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                                  SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-                                //adresse
-                                TextField(
-                                  onChanged: (val){
-                                  userAdresse = val;
-                                  },
-                                  decoration: InputDecoration(
-                                      labelText: 'Adresse',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0xFFe7edeb),
-                                      hintText: 'Adresse',
-                                      hintStyle: const TextStyle(
-                                          fontSize: 18
-                                      ),
-                                      prefixIcon: Icon(CupertinoIcons.location, color: Colors.blueGrey, size: 30,)
+                                  //mot de passe
+                                  TextFormField(
+                                    controller: userPassword,
+                                    validator: (value){
+                                      if(value!.isEmpty){
+                                        return " Le mot de passe est obligatoire! ";
+                                      }else if(value.length <6){
+                                        return " Le mot de passe doit contenir au minimum (6) caractères ! ";
+                                      }
+                                      return null;
+                                    },
+                                    obscureText: _obscureText,
+                                    decoration: InputDecoration(
+                                        labelText: 'Mot de passe *',
+                                        suffixIcon: GestureDetector(
+                                          onTap: (){
+                                            setState(() {
+                                              _obscureText = !_obscureText;
+                                            });
+                                          },
+                                          child: Icon(_obscureText? Icons.visibility : Icons.visibility_off),
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        filled: true,
+                                        fillColor: Color(0xFFe7edeb),
+                                        hintText: 'Mot de passe ',
+                                        prefixIcon: Icon(Icons.key, color: Colors.blueGrey, size: 30,)
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: MediaQuery.of(context).size.height * .02,),
-
-                                //mot de passe
-                                TextField(
-                                  onChanged: (val){
-                                  userPassword = val;
-                                  },
-                                  obscureText: _obscureText,
-                                  decoration: InputDecoration(
-                                      labelText: 'Mot de passe ',
-                                      suffixIcon: GestureDetector(
-                                        onTap: (){
-                                          setState(() {
-                                            _obscureText = !_obscureText;
-                                          });
-                                        },
-                                        child: Icon(_obscureText? Icons.visibility : Icons.visibility_off),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0xFFe7edeb),
-                                      hintText: 'Mot de passe ',
-                                      prefixIcon: Icon(Icons.key, color: Colors.blueGrey, size: 30,)
-                                  ),
-                                ),
 
 
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
 
-                        SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                          SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
-                        //container contenant le bouton de inscription
-                        Container(
-                          padding: const EdgeInsets.only(right: 20.0, left: 20.0),
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              elevation: 3,
-                            ),
-                              onPressed: (){
-                                  if(userUsername.isNotEmpty && userNumero.isNotEmpty && userEmail.isNotEmpty && userPassword.isNotEmpty && userAdresse.isNotEmpty){
-                                       Provider.of<ContactData>(context, listen: false).inscriptionUser(userUsername, userEmail, userNumero, userAdresse, userPassword
-                                  );
-                                    Navigator.pop(context);
-                                    print('okkkk');
-                                    }
-                                  else{
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                       SnackBar(
-                                         backgroundColor: Colors.white,
-                                          elevation: 5,
-                                          dismissDirection: DismissDirection.down,
-                                          content: Container(
-                                            height: 100,
-                                            width: MediaQuery.of(context).size.width * .90,
-                                            color: Colors.white,
-                                            child: const Center(
-                                                child: Text("Tous les champs doivent être remplis !",
-                                                  style: TextStyle(fontSize: 24, color: Colors.red),
-                                                  textAlign: TextAlign.center,)
+                          //container contenant le bouton de inscription
+                          Container(
+                            padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                elevation: 3,
+                              ),
+                                onPressed: () async {
+                                    if(formkey.currentState!.validate()) {
+                                      try {
+                                        if (await Provider.of<ContactData>(
+                                            context, listen: false)
+                                            .inscriptionUser(
+                                            userUsername.text, userEmail.toString(),
+                                            userNumero.text, userAdresse.text,
+                                            userPassword.text)) {
+                                          // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
+
+                                        }
+
+                                      } catch (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            duration: Duration(seconds: 20),
+                                            behavior: SnackBarBehavior.floating,
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            content: Container(
+                                                padding: EdgeInsets.all(15),
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.green,
+                                                  borderRadius: BorderRadius
+                                                      .circular(20),
+                                                ),
+                                                child: Center(
+                                                    child: Text(e.toString(),
+                                                      textAlign: TextAlign
+                                                          .center,
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    )
+                                                )
                                             ),
-                                          )
-                                      )
-                                    );
-                                  }
+
+                                          ),
+                                        );
+
+                                      }
+
+                                      print('okkkk');
+                                      // Navigator.pop(context);
+                                    }
                                   },
-                            child: const Text(
-                              'Inscription',
-                              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                              child: const Text(
+                                'Inscription',
+                                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                            ),
                           ),
-                        ),
 
-                        SizedBox(height: MediaQuery.of(context).size.height * .03,),
+                          SizedBox(height: MediaQuery.of(context).size.height * .03,),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [
-                            InkWell(
-                                onTap: (){
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Connexions()));
-                                },
-                                child: const Text("Allez à la page de connexion", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),)),
-                            const SizedBox(width: 3,),
-                            const Icon(CupertinoIcons.right_chevron, size: 26,)
-                          ],
-                        )
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  [
+                              InkWell(
+                                  onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Connexions()));
+                                  },
+                                  child: const Text("Allez à la page de connexion", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),)),
+                              const SizedBox(width: 3,),
+                              const Icon(CupertinoIcons.right_chevron, size: 26,)
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )

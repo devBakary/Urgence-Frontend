@@ -36,6 +36,8 @@ class _VideoPlayersState extends State<VideoPlayers> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width * .90,
         child: _chewieVideoPlayer());
   }
 

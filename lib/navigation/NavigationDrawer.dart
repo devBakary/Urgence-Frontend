@@ -129,7 +129,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             Expanded(
 
                 child: Center(
-                    child: Text("Nos politiques de confidentialites", style: TextStyle(fontSize: 20),))
+                    child: Text("Nos politiques de confidentialites", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,))
             )
           ],
         ),
@@ -185,7 +185,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfilPage())),
       child: Container(
         padding: EdgeInsets.all(10),
-        color: const Color(0xFF0054E0),
+        color: Colors.blue,
         child: Column(
           children:  [
             Container(

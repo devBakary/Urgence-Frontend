@@ -90,7 +90,7 @@ class ContactServices{
       else {
         logged = false;
         print('login Error');
-        throw Exception('Nom d\'utilisateur ou mot de passe incorrect'); // Connexion échouée
+        throw ('Nom d\'utilisateur ou mot de passe incorrect'); // Connexion échouée
       }
   }
 
@@ -103,11 +103,10 @@ class ContactServices{
 
 
   //====== methode pour ajouter des contact de l'utilisateur
-  static Future<Users> inscriprtion(String username, String email, String numero, String adresse, String password) async{
+  static Future<Users?> inscriprtion(String username, String numero, String adresse, String password) async{
    //on mappe les données
     Map data = {
       "username": username,
-      "email": email,
       "numero": numero,
       "adresse": adresse,
       "password": password,
@@ -124,14 +123,30 @@ class ContactServices{
         headers: headers,
         body: body
     );
+    print(response.statusCode);
 
-    //on va decoder les donnee envoyer en parametre
-    Map responseMap = json.decode(response.body);
-    
-    //on va creer une nouvelle instance de l'utilisateur
-    Users user = Users.fromMap(responseMap);
+    if(response.statusCode == 200){
+      //on va decoder les donnee envoyer en parametre
+      /*print(response.statusCode);
+      // Afficher une erreur.
+      String jsonString = response.body;
+      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+      String message = jsonMap['message'];
+      print(message);
+      //print(jsonDecode(response.body).);
+      Map responseMap = json.decode(response.body);
+      print('on set la');
+      //on va creer une nouvelle instance de l'utilisateur
+      Users user = Users.fromMap(responseMap);*/
 
-    return user;
+      return null;
+    }
+    else {
+      print(response.statusCode);
+      print(response.body);
+      throw (response.body);
+    }
+
   }
 
 //======== methode pour envoyer la localisation=========

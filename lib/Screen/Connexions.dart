@@ -137,32 +137,29 @@ class _ConnexionsState extends State<Connexions> {
                                   if (formkey.currentState!.validate()) {
                                     try {
                                       if (await contactServices.login(usernameController.text, passwordController.text)) {
-                                        //Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
                                       }
                                     } catch (e) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: Center(child: Text('Erreur de connexion ! ')),
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          behavior: SnackBarBehavior.floating,
+                                          backgroundColor: Colors.transparent,
+                                          elevation: 0,
                                           content: Container(
-                                            height: MediaQuery.of(context).size.height * .1,
-                                            child: Center(
-                                              child: Column(
-                                                children: [
-                                                  Icon(Icons.close),
-                                                  Text(e.toString(), style: const TextStyle(
-                                                    color: Colors.red
-                                                  ),),
-                                                ],
+                                            padding: EdgeInsets.all(15),
+                                              height: 80,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFC72C41),
+                                                borderRadius: BorderRadius.circular(20),
                                               ),
-                                            ),
+                                              child: Center(
+                                                  child: Text(e.toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(fontSize: 16),
+                                                  )
+                                              )
                                           ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.of(context).pop(),
-                                              child: Text('OK'),
-                                            ),
-                                          ],
+
                                         ),
                                       );
                                     }
