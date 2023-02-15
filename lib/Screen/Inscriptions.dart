@@ -19,10 +19,17 @@ class _InscriptionsState extends State<Inscriptions> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController userUsername= TextEditingController();
-  TextEditingController userEmail= TextEditingController();
   TextEditingController userNumero= TextEditingController();
   TextEditingController userAdresse= TextEditingController();
   TextEditingController userPassword = TextEditingController();
+  ContactServices contactServices = ContactServices();
+
+  recharge(){
+    setState(() {
+      userUsername.clear();
+    });
+  }
+
 
   bool _obscureText = true;
   @override
@@ -81,7 +88,7 @@ class _InscriptionsState extends State<Inscriptions> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: MediaQuery.of(context).size.height * .04,),
+                                  SizedBox(height: MediaQuery.of(context).size.height * .08,),
                                   TextFormField(
                                     controller: userUsername,
                                     validator: (value){
@@ -191,8 +198,6 @@ class _InscriptionsState extends State<Inscriptions> {
                                     ),
                                   ),
 
-
-
                                 ],
                               ),
                             ),
@@ -213,21 +218,13 @@ class _InscriptionsState extends State<Inscriptions> {
                                 onPressed: () async {
                                     if(formkey.currentState!.validate()) {
                                       try {
-                                        if (await Provider.of<ContactData>(
-                                            context, listen: false)
-                                            .inscriptionUser(
-                                            userUsername.text, userEmail.toString(),
-                                            userNumero.text, userAdresse.text,
-                                            userPassword.text)) {
-                                          // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
-
-                                        }
-
-                                      } catch (e) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            duration: Duration(seconds: 20),
+                                        if (await contactServices.inscriprtion(userUsername.text, userNumero.text, userAdresse.text, userPassword.text)) {
+                                          //Navigator.pop(context);
+                                          recharge();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                                SnackBar(
+                                            duration: Duration(seconds: 5),
                                             behavior: SnackBarBehavior.floating,
                                             backgroundColor: Colors.transparent,
                                             elevation: 0,
@@ -239,8 +236,38 @@ class _InscriptionsState extends State<Inscriptions> {
                                                   borderRadius: BorderRadius
                                                       .circular(20),
                                                 ),
+                                                child: const Center(
+                                                    child: Text('Votre compte a été créé avec succes !',
+                                                      textAlign: TextAlign
+                                                          .center,
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    )
+                                                )
+                                            ),
+
+                                          ));
+                                          // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
+                                        }
+
+                                      } catch (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            duration: Duration(seconds: 5),
+                                            behavior: SnackBarBehavior.floating,
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0,
+                                            content: Container(
+                                                padding: EdgeInsets.all(15),
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius: BorderRadius
+                                                      .circular(20),
+                                                ),
                                                 child: Center(
-                                                    child: Text(e.toString(),
+                                                    child: Text('$e',
                                                       textAlign: TextAlign
                                                           .center,
                                                       style: TextStyle(
@@ -253,9 +280,7 @@ class _InscriptionsState extends State<Inscriptions> {
                                         );
 
                                       }
-
-                                      print('okkkk');
-                                      // Navigator.pop(context);
+                                      formkey.currentState?.reset();
                                     }
                                   },
                               child: const Text(

@@ -42,31 +42,6 @@ class ContactServices{
 
 
   //==================== Pour l'authentification = ================
-  /*Future<http.Response> login(String username, String password) async {
-    Map data = {'username': username, 'password': password};
-    var body = jsonEncode(data);
-    var url = Uri.parse(baseURL + "/auth/connexion");
-    http.Response response = await http.post(url, headers: headers, body: body);
-
-    if (response.statusCode == 200) {
-      var loginArr = json.decode(response.body);
-      print(loginArr);
-      usID = loginArr['id'];
-      username = loginArr['username'];
-      final prefs=await SharedPreferences.getInstance();
-      await prefs.setInt('id',loginArr['id']);
-      logged = true;
-
-    } else {
-      logged = false;
-      print('login Error');
-    }
-
-    return response;
-
-  }*/
-
-
 
   // ...
 
@@ -103,7 +78,7 @@ class ContactServices{
 
 
   //====== methode pour ajouter des contact de l'utilisateur
-  static Future<Users?> inscriprtion(String username, String numero, String adresse, String password) async{
+   Future<bool> inscriprtion(String username, String numero, String adresse, String password) async{
    //on mappe les données
     Map data = {
       "username": username,
@@ -139,7 +114,7 @@ class ContactServices{
       //on va creer une nouvelle instance de l'utilisateur
       Users user = Users.fromMap(responseMap);*/
 
-      return null;
+      return true;
     }
     else {
       print(response.statusCode);
