@@ -19,8 +19,6 @@ class UserService{
 
     List responseList = jsonDecode(response.body);
 
-
-
     List<Users> users = [];
     for (Map userMap in responseList){
       Users user = Users.fromMap(userMap);
@@ -37,5 +35,28 @@ class UserService{
     }
 
     return users;
+  }
+
+
+  static Future<bool> passOublie(String username) async {
+    Map data = {
+      "username" : username
+    };
+
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + '/auth/resetpassword');
+    http.Response response = await http.post(url,
+      headers: headers,
+      body: body
+    );
+    print(response.body);
+    if(http.Response == 200){
+
+      return true;
+    }
+    else{
+      throw (response.body);
+    }
+
   }
 }

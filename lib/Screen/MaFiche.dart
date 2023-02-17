@@ -20,43 +20,51 @@ class _MaFicheState extends State<MaFiche> {
 
   List<Fiche> fiches = [];
 
-  String ficheNom = '';
-  String fichePrenom = '';
+  final ficheNom = TextEditingController();
+  TextEditingController fichePrenom = TextEditingController();
   String ficheAllergie = '';
   String ficheGroupe = '';
   String ficheAdresse = "";
   //int usId = 0;
 
-  String noms= '';
-  String prenom = '';
-  String allergie= '';
-  String groupe = '';
+  var noms;
+  var fprenom;
+  var fallergie;
+  var fgroupe;
+  var fadresse;
 
-  /*Future init() async {
+  Future init() async {
     final prefs = await SharedPreferences.getInstance();
-    //usId = prefs.getInt('id')!;
-    noms = prefs.getString('nom')!;
-    prenom = prefs.getString('prenom')!;
-    groupe = prefs.getString('groupe')!;
-    print("ici");
-    print(noms);
-    print("ici");
-      setState(() {
 
-      });
-    getContact();
-    }*/
-  getContact() async{
+    fadresse = prefs.getString('adresse');
+    noms = prefs.getString('nom')!;
+    ficheNom.text = prefs.getString('prenom')!;
+    fgroupe = prefs.getString('groupe')!;
+    fallergie = prefs.getString('allergie')!;
+    setState(() {
+
+    });
+  }
+  getFiche() async{
     fiches = await FichesServices.getfiche(usID);
     Provider.of<ContactData>(context, listen: false).fiches = fiches!;
+    init();
     setState(() { });
+
   }
 
   @override
   void initState(){
     super.initState();
-    getContact();
+    ficheNom.text = fnom;
+    getFiche();
+    init();
     idl;
+    fnom;
+    prenoms;
+    setState(() {
+
+    });
   }
 
   @override
@@ -94,10 +102,36 @@ class _MaFicheState extends State<MaFiche> {
           actions: <Widget>[
           // Premier bouton
           InkWell(
-            onTap: (){
-
-                Provider.of<ContactData>(context, listen: false).addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
+            onTap: () async {
+                Provider.of<ContactData>(context, listen: false).addFiche(ficheNom.text, fichePrenom.text, ficheAllergie, ficheGroupe, ficheAdresse, idl);
                 print('ookk');
+
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 5),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      content: Container(
+                          padding: EdgeInsets.all(15),
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius
+                                .circular(20),
+                          ),
+                          child: const Center(
+                              child: Text('Votre compte a été créé avec succes !',
+                                textAlign: TextAlign
+                                    .center,
+                                style: TextStyle(
+                                    fontSize: 16),
+                              )
+                          )
+                      ),
+
+                    ));
 
 
               },
@@ -133,9 +167,9 @@ class _MaFicheState extends State<MaFiche> {
                     child: Icon(CupertinoIcons.person_crop_circle_fill, size: 90, color: Colors.white,),
                   ),
 
-                  Text(
+                  Text('dd',
 
-                    fnom != null ? '$fnom' : '',
+                    //fnom != null ? '$fnom' : '',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ],
@@ -172,12 +206,7 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (fnom){
-                             ficheNom = fnom ;
-                             if(ficheNom == null){
-                               ficheNom = fnom;
-                             }
-                           },
+                           controller: ficheNom,
                            decoration: InputDecoration(
                                hintText: fnom != null ? '$fnom' : 'nom',
                                hintStyle: TextStyle(color: Colors.blueAccent),
@@ -210,14 +239,7 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (val){
-                             fichePrenom = val;
-                             if(fichePrenom == null){
-                               fichePrenom = prenoms;
-                             }
-
-                           },
-
+                           controller: fichePrenom,
                            decoration: InputDecoration(
                                hintText: prenoms != null ? '$prenoms' : 'prenom',
                                hintStyle: TextStyle(color: Colors.blueAccent),
@@ -254,12 +276,13 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              ficheAdresse = val;
-                             if(ficheAdresse == null){
-                               ficheAdresse = adresses;
+                             if(val.isEmpty){
+                               ficheAdresse = fadresse;
+                               print(fadresse);
                              }
                            },
                            decoration: InputDecoration(
-                               hintText: adresses != null ? '$adresses' : 'adresse',
+                               hintText: fadresse != null ? '$fadresse' : 'adresse',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),
@@ -295,7 +318,7 @@ class _MaFicheState extends State<MaFiche> {
                            onChanged: (val){
                              ficheAllergie = val;
                              if(ficheAllergie == null){
-                               ficheAllergie = allergies;
+                               ficheAllergie = fallergie;
                              }
                            },
                            decoration: InputDecoration(
@@ -365,5 +388,6 @@ class _MaFicheState extends State<MaFiche> {
     );
   }
 }
+
 
 

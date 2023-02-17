@@ -48,20 +48,27 @@ class FichesServices{
     );
 
     List responseList = jsonDecode(response.body);
-    print(response.body);
-    print(responseList);
+    //print(response.body);
+
 
     List<Fiche> fiches = [];
     for (Map ficheMap in responseList){
       Fiche fiche = Fiche.fromMap(ficheMap);
+      print(ficheMap);
       fnom = ficheMap['nom'];
       idl = ficheMap['id'];
       prenoms = ficheMap['prenom'];
       allergies = ficheMap['allergie'];
       groupes = ficheMap['groupe'];
       adresses = ficheMap['adresse'];
-
+      print(adresses);
       fiches.add(fiche);
+      final prefs= await SharedPreferences.getInstance();
+      await prefs.setString('prenom', ficheMap['prenom']);
+      await prefs.setString('nom',ficheMap['nom']);
+      await prefs.setString('groupe',ficheMap['groupe']);
+      await prefs.setString('adresse', ficheMap['adresse']);
+      await prefs.setString('allergie', ficheMap['allergie']);
     }
 
     return fiches;

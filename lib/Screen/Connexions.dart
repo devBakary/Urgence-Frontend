@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/Inscriptions.dart';
+import 'package:urgence_projet/Service/UserService.dart';
 import 'package:urgence_projet/Service/globals.dart';
 
 import '../Service/ContactService.dart';
@@ -124,7 +125,13 @@ class _ConnexionsState extends State<Connexions> {
 
                             SizedBox(height: MediaQuery.of(context).size.height * .03,),
 
-                            Text("Mot de passe oublié ?", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),),
+                             InkWell(
+                              onTap: (){
+                                okContext(context);
+                              },
+                                child: const Text("Mot de passe oublié ?"
+                                  , style: TextStyle(fontSize: 16,
+                                      decoration: TextDecoration.underline),)),
 
 
                             SizedBox(height: MediaQuery.of(context).size.height * .04,),
@@ -207,5 +214,115 @@ class _ConnexionsState extends State<Connexions> {
         )
     );
   }
+
+  motdepasse(context){
+    TextEditingController username = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Mot de passe oublié ?",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
+          content: Container(
+            height: 200,
+            child: Column(
+              children: [
+                const Text("Veuillez renseigner votre nom d'utilisateur "),
+                TextFormField(
+                  controller: username,
+                  decoration: InputDecoration(
+                    hintText: 'votre username'
+                  ),
+                ),
+                SizedBox(height: 10,),
+
+                InkWell(
+                  child: Text('envoi'),
+                  onTap: () async {
+
+                      try{
+                        if(await UserService.passOublie(username.text)){
+                          print("ok");
+
+                       }
+                      }catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            content: Container(
+                                padding: EdgeInsets.all(15),
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFC72C41),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Center(
+                                    child: Text(e.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 16),
+                                    )
+                                )
+                            ),
+
+                          ),
+                        );
+                      }
+
+                  },
+                )
+              ],
+            ),
+          ),
+
+        )
+    );
+  }
+
+  okContext(context){
+    showDialog(context: context,
+        builder: (context)=> AlertDialog(
+          title: Center(child: Text("Redirection")),
+          content: Container(
+            height: 120,
+            child: Column(
+              children:  [
+                const Text("Un mot de passe vous a été envoyé sur votre compte mail et "
+                    "allez être redirigé a la page de réinitialisation !"
+                ),
+
+                SizedBox(height: 15,),
+                Padding(
+                  padding:  EdgeInsets.only(left: 5,right: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ElevatedButton(onPressed: (){}, child: Text("ok")),
+
+                      ElevatedButton(
+                        style: ButtonStyle(
+
+                        ),
+                          onPressed: (){
+                        Navigator.pop(context);
+                      }, child: Text("Annuler",)),
+                    ],
+                  ),
+                )
+
+
+              ],
+            ),
+          ),
+        )
+    );
+  }
 }
+
+
+
 
