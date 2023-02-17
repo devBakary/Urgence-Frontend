@@ -48,6 +48,8 @@ class FichesServices{
     );
 
     List responseList = jsonDecode(response.body);
+    print(response.body);
+    print(responseList);
 
     List<Fiche> fiches = [];
     for (Map ficheMap in responseList){

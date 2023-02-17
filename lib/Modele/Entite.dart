@@ -4,12 +4,14 @@ class Entite{
   final String nom;
   final String? numero;
   final String img;
+  final String audio;
 
   Entite( {
     required this.id,
     required this.nom,
     required this.numero,
     required this.img,
+    required this.audio,
   });
 
   factory Entite.fromMap(Map entiteMap){
@@ -17,7 +19,8 @@ class Entite{
         id: entiteMap['id'],
         nom: entiteMap['nom'],
         numero: entiteMap['numero'],
-        img: entiteMap['img']
+        img: entiteMap['img'],
+        audio: entiteMap['audio']
     );
   }
 }

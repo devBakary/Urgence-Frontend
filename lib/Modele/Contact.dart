@@ -4,7 +4,8 @@ class Contact{
   final String prenom;
   final String? email;
   final String? numero;
-  final String? adresse;
+  final String? domicile;
+  final String? lien;
 
   Contact({
     required this.id,
@@ -12,7 +13,8 @@ class Contact{
     required this.prenom,
     required this.email,
     required this.numero,
-    required this.adresse
+    required this.domicile,
+    required this.lien
   });
 
   factory Contact.fromMap(Map contactMap){
@@ -22,7 +24,8 @@ class Contact{
         prenom: contactMap['prenom'],
         email: contactMap['eamil'],
         numero: contactMap['numero'],
-        adresse: contactMap['adresse']
+        domicile: contactMap['domicile'],
+        lien: contactMap['lien']
     );
   }
 }

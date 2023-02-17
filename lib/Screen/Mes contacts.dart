@@ -50,19 +50,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   getContact() async{
-    contacts = await ContactServices.getContact(id);
+    contacts = await ContactServices.getContact(usID);
     Provider.of<ContactData>(context, listen: false).contacts = contacts!;
     setState(() { });
-  }
-
-  logout() async{
-    final prefs = await SharedPreferences.getInstance();
-    final success = await prefs.remove('id');
-    //print("ca marche");
-    setState(() {
-      success;
-    });
-    getContact();
   }
 
 
@@ -70,7 +60,10 @@ class _HomescreenState extends State<Homescreen> {
   void initState(){
     super.initState();
     init();
-    id= 0;
+    //id= 0;
+    setState(() {
+
+    });
   }
 
 
@@ -180,12 +173,18 @@ class _HomescreenState extends State<Homescreen> {
 void _ouvrirTab(context){
 
 
-   String contactNom = '';
-   String contactPrenom = "";
-   String contactEmail = "";
-   String contactNumero = "";
-   String contactAdresse = "";
-   int usId = usID;
+  TextEditingController contactNom = TextEditingController();
+  TextEditingController contactPrenom = TextEditingController();
+  TextEditingController contactEmail = TextEditingController();
+  TextEditingController contactNumero = TextEditingController();
+  TextEditingController contactAdresse = TextEditingController();
+  TextEditingController contactLien = TextEditingController();
+
+  int usId = usID;
+   ajout() async{
+     await ContactServices.addContact(contactNom.text, contactPrenom.text, contactEmail.text, contactNumero.text, contactAdresse.text, contactLien.text, usId);
+   }
+   final formkey = GlobalKey<FormState>();
    var errorMessage;
 
   showModalBottomSheet(context: context,
@@ -197,132 +196,172 @@ void _ouvrirTab(context){
           child: Container(
             height: MediaQuery.of(context).size.height * .90,
             color: Colors.white,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+            child: Form(
+              key: formkey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
 
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: const Icon(
-                            Icons.close,
-                            size: 40,
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Icon(
+                              Icons.close,
+                              size: 40,
+                            ),
                           ),
-                        ),
 
-                        const Text("Nouveau Contact", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-
-                         InkWell(
-                          onTap: (){
-                            if(contactNumero.isEmpty){
-                                errorMessage = 'Le champ de saisie ne peut pas être vide';
-                            }
-                            else{
-                              Provider.of<ContactData>(context, listen: false).addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse, usId);
-                              Navigator.pop(context);
-                              print('okkkk');
-                            }
-
-
-                          },
-                          child: const Text("OK", style: TextStyle(fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue),
-
+                          const Text("Nouveau Contact", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                        ),
 
-                      ]
-                  ),
-                ),
+                           InkWell(
+                            onTap: () async {
+                              if(formkey.currentState!.validate()){
+                                if( ajout() == true){
 
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Container(
-                    child: const Center(
-                      child: Icon(CupertinoIcons.person_circle_fill,
-                          size: 140,
-                          color: Colors.black54),
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(
+                                      SnackBar(
+                                        duration: Duration(seconds: 5),
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        content: Container(
+                                            padding: EdgeInsets.all(15),
+                                            height: 80,
+                                            decoration: BoxDecoration(
+                                              color: Colors.green,
+                                              borderRadius: BorderRadius
+                                                  .circular(20),
+                                            ),
+                                            child:  Center(
+                                                child: Text('Contact ${contactNom} ${contactNumero} ajouté avec succes !',
+                                                  textAlign: TextAlign
+                                                      .center,
+                                                  style: const TextStyle(
+                                                      fontSize: 16),
+                                                )
+                                            )
+                                        ),
+
+                                      )
+                                  );
+                                  Navigator.pop(context);
+                                }
+                              }
+
+                                print('okkkk');
+
+
+                            },
+                            child: const Text("OK", style: TextStyle(fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+
+                            ),
+                          ),
+
+                        ]
                     ),
                   ),
-                ),
 
-                Padding(
-                  padding:  EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (val){
-                      contactPrenom = val;
-                    },
-                    decoration: const InputDecoration(
-                        hintText: 'Prenom',
-                        border: UnderlineInputBorder()
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
+                      child: const Center(
+                        child: Icon(CupertinoIcons.person_circle_fill,
+                            size: 140,
+                            color: Colors.black54),
+                      ),
                     ),
                   ),
-                ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (val){
-                      contactNom = val;
-                    },
-                    decoration: const InputDecoration(
-                        hintText: 'Nom',
-                        border: UnderlineInputBorder()
+                  Padding(
+                    padding:  EdgeInsets.only(left: 15, right: 15),
+
+                    child: TextFormField(
+                      controller: contactPrenom,
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return " Le prenom est obligatoire! ";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                          hintText: 'Prenom',
+                          border: UnderlineInputBorder()
+                      ),
                     ),
                   ),
-                ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (val){
-                      contactEmail = val;
-                    },
-                    decoration: const InputDecoration(
-                        hintText: 'example@gmail.com',
-                        border: UnderlineInputBorder()
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: contactNom,
+                      decoration: const InputDecoration(
+                          hintText: 'Nom',
+                          border: UnderlineInputBorder()
+                      ),
                     ),
                   ),
-                ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (val){
-                      contactNumero = val;
-                    },
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      hintText: 'numero',
-                      border: UnderlineInputBorder(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: contactEmail,
+                      decoration: const InputDecoration(
+                          hintText: 'example@gmail.com',
+                          border: UnderlineInputBorder()
+                      ),
                     ),
                   ),
-                ),
-                if (errorMessage != null)
-                  Text(
-                    errorMessage,
-                    style: TextStyle(color: Colors.red),
-                  ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (val){
-                      contactAdresse = val;
-                    },
-                    decoration: const InputDecoration(
-                        hintText: 'Adresse',
-                        border: UnderlineInputBorder()
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: contactNumero,
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return " Le numero est obligatoire! ";
+                        }else if(value.length !=8){
+                          return " Le mot de passe doit contenir au minimum (6) caractères ! ";
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                        hintText: 'numero',
+                        border: UnderlineInputBorder(),
+                      ),
                     ),
                   ),
-                ),
 
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: contactAdresse,
+                      decoration: const InputDecoration(
+                          hintText: 'Adresse',
+                          border: UnderlineInputBorder()
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: contactLien,
+                      decoration: const InputDecoration(
+                          hintText: 'Lien',
+                          border: UnderlineInputBorder()
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
             ),
           ),
         );

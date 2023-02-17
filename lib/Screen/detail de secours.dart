@@ -29,7 +29,7 @@ class _DetailsGesteState extends State<DetailsGeste> {
   @override
   void initState() {
     super.initState();
-    videoURL = "https://www.youtube.com/watch?v=helEv0kGHd4&list=RDla63LVk5ZWU&index=26"; // set the videoURL variable to the video URL of the current gesture
+    videoURL = widget.geste.lien; // set the videoURL variable to the video URL of the current gesture
     lire(); // call the lire() method to create the YoutubePlayerController
   }
   @override

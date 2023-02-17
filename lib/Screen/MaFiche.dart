@@ -95,8 +95,11 @@ class _MaFicheState extends State<MaFiche> {
           // Premier bouton
           InkWell(
             onTap: (){
-              Provider.of<ContactData>(context, listen: false).addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
-              print('ookk');
+
+                Provider.of<ContactData>(context, listen: false).addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
+                print('ookk');
+
+
               },
            child:  Container(
 
@@ -171,6 +174,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (fnom){
                              ficheNom = fnom ;
+                             if(ficheNom == null){
+                               ficheNom = fnom;
+                             }
                            },
                            decoration: InputDecoration(
                                hintText: fnom != null ? '$fnom' : 'nom',
@@ -206,6 +212,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              fichePrenom = val;
+                             if(fichePrenom == null){
+                               fichePrenom = prenoms;
+                             }
 
                            },
 
@@ -245,6 +254,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              ficheAdresse = val;
+                             if(ficheAdresse == null){
+                               ficheAdresse = adresses;
+                             }
                            },
                            decoration: InputDecoration(
                                hintText: adresses != null ? '$adresses' : 'adresse',
@@ -282,6 +294,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              ficheAllergie = val;
+                             if(ficheAllergie == null){
+                               ficheAllergie = allergies;
+                             }
                            },
                            decoration: InputDecoration(
                                hintText: allergies != null ? '$allergies' : 'allergie',
@@ -320,6 +335,9 @@ class _MaFicheState extends State<MaFiche> {
                          TextFormField(
                            onChanged: (val){
                              ficheGroupe= val;
+                             if(ficheGroupe == null){
+                               ficheGroupe = groupes;
+                             }
                            },
                            decoration: InputDecoration(
                                hintText: groupes != null ? '$groupes' : 'groupe sanguin',

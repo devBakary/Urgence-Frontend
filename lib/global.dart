@@ -5,7 +5,9 @@ int usID = 0;
 
 
 //le username
-var username;
+var usernames;
+
+var usern;
 
 
 //longitude et latitude

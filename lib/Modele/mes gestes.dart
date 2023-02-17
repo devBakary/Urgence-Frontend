@@ -3,10 +3,10 @@ class Geste{
   final String nom;
   final String description;
   final String img1;
-  final String img2;
+  final String lien;
 
   Geste(
-      this.id, this.nom, this.description, this.img1, this.img2,
+      this.id, this.nom, this.description, this.img1, this.lien,
       );
 
 
@@ -16,7 +16,7 @@ class Geste{
         gesteMap['nom'],
         gesteMap['description'],
         gesteMap['img1'],
-        gesteMap['img2']
+        gesteMap['lien']
     );
   }
 

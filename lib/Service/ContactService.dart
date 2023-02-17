@@ -17,13 +17,14 @@ import '../Modele/mes gestes.dart';
 class ContactServices{
 
   // ===== methode pour l'ajout des contact de l'utilisateur =========================
-  static Future<Contact> addContact(String nom, String prenom, String email, String numero, String adresse, int id) async{
+  static Future<bool> addContact(String nom, String prenom, String email, String numero, String domicile, String lien, int id) async{
     Map data = {
       "nom": nom,
       "prenom": prenom,
       "email": email,
       "numero": numero,
-      "adresse": adresse,
+      "domicile": domicile,
+      "lien": lien
     };
 
     var body = json.encode(data);
@@ -37,7 +38,7 @@ class ContactServices{
 
     Contact contact = Contact.fromMap(responseMap);
     print('c moi');
-    return contact;
+    return true;
   }
 
 
@@ -53,12 +54,11 @@ class ContactServices{
 
       if (response.statusCode == 200) {
          var loginArr = json.decode(response.body);
-          print(loginArr);
           usID = loginArr['id'];
-          username = loginArr['username'];
+          usernames = loginArr['username'];
           final prefs=await SharedPreferences.getInstance();
           await prefs.setInt('id',loginArr['id']);
-          logged = true;
+          await prefs.setString('us', loginArr['username']);
 
           return true; // Connexion réussie
       }
@@ -68,12 +68,6 @@ class ContactServices{
         throw ('Nom d\'utilisateur ou mot de passe incorrect'); // Connexion échouée
       }
   }
-
-  // ...
-
-
-
-  //========= fin de la partie de l'authentification================
 
 
 
@@ -154,6 +148,7 @@ class ContactServices{
     );
 
     List responseList = jsonDecode(response.body);
+    print(response.body);
 
     List<Contact> contacts = [];
     for (Map contactMap in responseList){

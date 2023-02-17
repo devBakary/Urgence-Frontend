@@ -27,13 +27,7 @@ class ContactData extends ChangeNotifier{
 
 
   //la methode pour ajouter un contact
-  void addContact(String contactNom, String contactPrenom, String contactEmail, String contactNumero, String contactAdresse, usId) async{
 
-    Contact contact = await ContactServices.addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse, usId);
-
-    contacts.add(contact);
-    notifyListeners();
-  }
 
   //la methode pour s'inscrire
    /*inscriptionUser(String userUsername, String userNumero, String userAdresse, String userPassword) async {

@@ -3,7 +3,7 @@ class Users{
   final String username;
   final String? email;
   final String? adresse;
-  final String numero;
+  final int numero;
   final String password;
 
   Users(

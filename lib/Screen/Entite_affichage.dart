@@ -130,7 +130,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                         borderRadius: BorderRadius.circular(100),
                     ) ,
                     child: CircleAvatar(
-                        child: Image.asset("assets/images/violence.png}", width: 20,height: 20,)),
+                        child: Image.asset("assets/images/${widget.entite.img}", width: 40,height: 40,)),
                   ),
                 ),
 
@@ -181,7 +181,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                                 IconButton(
                                   icon: const Icon(CupertinoIcons.speaker_2_fill, color: Colors.red,),
                                   onPressed: () async {
-                                    await _player.setAsset('assets/audios/msic.mp3');
+                                    await _player.setAsset('assets/audios/${widget.entite.audio}');
                                       setState(() {
                                         play = !play;
                                       });

@@ -58,7 +58,7 @@ class ContactTile extends StatelessWidget {
                     child: Row(
 
                       children: [
-                        Text(contact.prenom + " " + contact.nom, style: TextStyle(
+                        Text(contact.prenom + " " + contact.nom, style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold),),
                         //SizedBox(width: MediaQuery.of(context).size.width * .13,),

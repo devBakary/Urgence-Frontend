@@ -369,9 +369,43 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: '90675432',
-                          hintStyle: TextStyle(color: Colors.blueAccent),
+                      decoration:  InputDecoration(
+                          hintText:  widget.contact.domicile != null ? widget.contact.domicile : "domicile",
+                          hintStyle: const TextStyle(color: Colors.blueAccent),
+                          border: InputBorder.none
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                padding: EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                    color: Color(0xFFDEE3E8),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0),
+                    )
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Lien",
+                      style: TextStyle(fontSize: 17,
+                          color: Colors.black),
+                    ),
+
+                    TextFormField(
+                      decoration:  InputDecoration(
+                          hintText:  widget.contact.lien != null ? widget.contact.lien : "lien de parenté",
+                          hintStyle: const TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),
                     ),

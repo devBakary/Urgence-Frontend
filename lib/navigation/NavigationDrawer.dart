@@ -171,7 +171,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         break;
 
       case 7 :
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Connexions()));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>Connexions()), (route) => false);
         break;
 
       default:
@@ -199,7 +199,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
             ),
             const SizedBox(width: 20,),
-             Text('${username}', style: TextStyle(fontSize: 24, color: Colors.white),),
+             Text('${usernames}', style: TextStyle(fontSize: 24, color: Colors.white),),
           ],
         ),
       ),
