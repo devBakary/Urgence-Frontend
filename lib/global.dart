@@ -8,6 +8,7 @@ int usID = 0;
 var usernames;
 
 var usern;
+var util;
 
 
 //longitude et latitude

@@ -9,6 +9,7 @@ import 'package:urgence_projet/global.dart';
 
 import '../Modele/Contact_data.dart';
 import '../Modele/User.dart';
+import 'Password/Mot de passe oublié.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
@@ -93,7 +94,9 @@ class _ProfilPageState extends State<ProfilPage> {
 
                         IconButton(
                           alignment: AlignmentDirectional.topEnd,
-                            onPressed: (){null;},
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>Reenitialisation()));
+                            },
                             icon: Icon(Icons.settings, color: Colors.white, size: 32,),
                         ),
 

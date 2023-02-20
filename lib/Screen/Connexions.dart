@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/Inscriptions.dart';
+import 'package:urgence_projet/Screen/Password/Mot%20de%20passe%20oubli%C3%A9.dart';
 import 'package:urgence_projet/Service/UserService.dart';
 import 'package:urgence_projet/Service/globals.dart';
 
@@ -127,7 +128,7 @@ class _ConnexionsState extends State<Connexions> {
 
                              InkWell(
                               onTap: (){
-                                okContext(context);
+                                motdepasse(context);
                               },
                                 child: const Text("Mot de passe oublié ?"
                                   , style: TextStyle(fontSize: 16,
@@ -232,47 +233,56 @@ class _ConnexionsState extends State<Connexions> {
                 const Text("Veuillez renseigner votre nom d'utilisateur "),
                 TextFormField(
                   controller: username,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'votre username'
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 20,),
 
-                InkWell(
-                  child: Text('envoi'),
-                  onTap: () async {
+                Container(
+                  width: MediaQuery.of(context).size.width * .8,
+                  height: 50,
+                  child: ElevatedButton(
+                    child: Text('envoi'),
+                    onPressed: () async {
 
-                      try{
-                        if(await UserService.passOublie(username.text)){
-                          print("ok");
 
-                       }
-                      }catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            backgroundColor: Colors.transparent,
-                            elevation: 0,
-                            content: Container(
-                                padding: EdgeInsets.all(15),
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFC72C41),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Center(
-                                    child: Text(e.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 16),
-                                    )
-                                )
+                        try{
+                          if( await UserService.passOublie(username.text) == true){
+                            print("okfffffffffffff");
+                            await okContext(context).pop;
+                         }
+                          else{
+                            print("okfffffffffffffo");
+
+                          }
+                        }catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              content: Container(
+                                  padding: EdgeInsets.all(15),
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFC72C41),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Center(
+                                      child: Text(e.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16),
+                                      )
+                                  )
+                              ),
+
                             ),
+                          );
+                        }
 
-                          ),
-                        );
-                      }
-
-                  },
+                    },
+                  ),
                 )
               ],
             ),
@@ -290,7 +300,7 @@ class _ConnexionsState extends State<Connexions> {
             height: 120,
             child: Column(
               children:  [
-                const Text("Un mot de passe vous a été envoyé sur votre compte mail et "
+                const Text("Un mot de passe vous a été envoyé sur votre mail et "
                     "allez être redirigé a la page de réinitialisation !"
                 ),
 
@@ -301,11 +311,15 @@ class _ConnexionsState extends State<Connexions> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      ElevatedButton(onPressed: (){}, child: Text("ok")),
+                      ElevatedButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>Reenitialisation(username: usernameController,)));
+                      },
+                          child: Text("Continuer"),
+                      ),
 
                       ElevatedButton(
-                        style: ButtonStyle(
-
+                        style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
                         ),
                           onPressed: (){
                         Navigator.pop(context);

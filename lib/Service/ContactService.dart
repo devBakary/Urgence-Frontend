@@ -56,6 +56,7 @@ class ContactServices{
          var loginArr = json.decode(response.body);
           usID = loginArr['id'];
           usernames = loginArr['username'];
+          util = loginArr['username'];
           final prefs=await SharedPreferences.getInstance();
           await prefs.setInt('id',loginArr['id']);
           await prefs.setString('us', loginArr['username']);

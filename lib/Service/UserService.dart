@@ -49,8 +49,14 @@ class UserService{
       headers: headers,
       body: body
     );
-    print(response.body);
-    if(http.Response == 200){
+    print(body);
+    print(response.statusCode);
+
+    if(response.statusCode == 200){
+      print(response.body);
+       util = response.body;
+      print('on est laaa');
+      print(util);
 
       return true;
     }
@@ -58,5 +64,28 @@ class UserService{
       throw (response.body);
     }
 
+  }
+
+
+
+  static Future<bool> reinitialiser(String currentpassword, String newpassword, String confirmpassword, String username) async {
+
+    Map data = {
+      "currentpassword" : currentpassword,
+      "newpassword" : newpassword,
+      "confirmpassword" : confirmpassword
+    };
+
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + '/auth/changePassword/$util');
+
+    http.Response response = await http.post(url, headers: headers, body: body);
+
+    if(response.statusCode == 200){
+      return true;
+    }
+    else{
+      throw (response.body);
+    }
   }
 }
