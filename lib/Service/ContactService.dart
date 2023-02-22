@@ -96,18 +96,6 @@ class ContactServices{
     print(response.statusCode);
 
     if(response.statusCode == 200){
-      //on va decoder les donnee envoyer en parametre
-      /*print(response.statusCode);
-      // Afficher une erreur.
-      String jsonString = response.body;
-      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      String message = jsonMap['message'];
-      print(message);
-      //print(jsonDecode(response.body).);
-      Map responseMap = json.decode(response.body);
-      print('on set la');
-      //on va creer une nouvelle instance de l'utilisateur
-      Users user = Users.fromMap(responseMap);*/
 
       return true;
     }

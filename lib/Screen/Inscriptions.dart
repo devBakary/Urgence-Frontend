@@ -220,7 +220,11 @@ class _InscriptionsState extends State<Inscriptions> {
                                       try {
                                         if (await contactServices.inscriprtion(userUsername.text, userNumero.text, userAdresse.text, userPassword.text)) {
                                           //Navigator.pop(context);
-                                          recharge();
+                                          userUsername.text = '';
+                                          userNumero.text = '';
+                                          userAdresse.text = '';
+                                          userPassword.text = '';
+
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                                 SnackBar(

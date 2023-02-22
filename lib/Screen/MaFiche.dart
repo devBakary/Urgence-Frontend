@@ -18,7 +18,7 @@ class MaFiche extends StatefulWidget {
 
 class _MaFicheState extends State<MaFiche> {
 
-  List<Fiche> fiches = [];
+  List<Fiche>? fiches = [];
 
   final ficheNom = TextEditingController();
   TextEditingController fichePrenom = TextEditingController();
@@ -56,7 +56,7 @@ class _MaFicheState extends State<MaFiche> {
   @override
   void initState(){
     super.initState();
-    ficheNom.text = fnom;
+   // ficheNom.text = fnom;
     getFiche();
     init();
     idl;
@@ -167,9 +167,9 @@ class _MaFicheState extends State<MaFiche> {
                     child: Icon(CupertinoIcons.person_crop_circle_fill, size: 90, color: Colors.white,),
                   ),
 
-                  Text('dd',
+                  Text( fnom != null ? fnom : '',
 
-                    //fnom != null ? '$fnom' : '',
+                    //
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ],

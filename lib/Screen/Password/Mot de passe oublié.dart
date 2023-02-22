@@ -29,6 +29,7 @@ class _ReenitialisationState extends State<Reenitialisation> {
             Container(
               height: 200,
               color: Colors.amber,
+              child: ,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * .08,),
 
@@ -40,7 +41,6 @@ class _ReenitialisationState extends State<Reenitialisation> {
                 width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-
                 ),
                 child: Column(
                   children: [
