@@ -20,11 +20,11 @@ class _MaFicheState extends State<MaFiche> {
 
   List<Fiche>? fiches = [];
 
-  final ficheNom = TextEditingController();
+  TextEditingController ficheNom = TextEditingController();
   TextEditingController fichePrenom = TextEditingController();
-  String ficheAllergie = '';
-  String ficheGroupe = '';
-  String ficheAdresse = "";
+  TextEditingController ficheAllergie = TextEditingController();
+  TextEditingController ficheGroupe = TextEditingController();
+  TextEditingController ficheAdresse = TextEditingController();
   //int usId = 0;
 
   var noms;
@@ -38,7 +38,7 @@ class _MaFicheState extends State<MaFiche> {
 
     fadresse = prefs.getString('adresse');
     noms = prefs.getString('nom')!;
-    ficheNom.text = prefs.getString('prenom')!;
+    fprenom = prefs.getString('prenom')!;
     fgroupe = prefs.getString('groupe')!;
     fallergie = prefs.getString('allergie')!;
     setState(() {
@@ -103,7 +103,7 @@ class _MaFicheState extends State<MaFiche> {
           // Premier bouton
           InkWell(
             onTap: () async {
-                Provider.of<ContactData>(context, listen: false).addFiche(ficheNom.text, fichePrenom.text, ficheAllergie, ficheGroupe, ficheAdresse, idl);
+                FichesServices.addFiche(ficheNom.text, fichePrenom.text, ficheAllergie.text, ficheGroupe.text, ficheAdresse.text, idl);
                 print('ookk');
 
                 ScaffoldMessenger.of(context)
@@ -167,7 +167,7 @@ class _MaFicheState extends State<MaFiche> {
                     child: Icon(CupertinoIcons.person_crop_circle_fill, size: 90, color: Colors.white,),
                   ),
 
-                  Text( fnom != null ? fnom : '',
+                  Text( noms != null ? noms : '',
 
                     //
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
@@ -207,8 +207,13 @@ class _MaFicheState extends State<MaFiche> {
 
                          TextFormField(
                            controller: ficheNom,
+                           /*onChanged: (value){
+                             if(ficheNom.text.isEmpty){
+                               ficheNom.text = fnom;
+                             }
+                           },*/
                            decoration: InputDecoration(
-                               hintText: fnom != null ? '$fnom' : 'nom',
+                               hintText: noms != null ? '$noms' : 'nom',
                                hintStyle: TextStyle(color: Colors.blueAccent),
                                border: InputBorder.none
                            ),
@@ -274,13 +279,7 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (val){
-                             ficheAdresse = val;
-                             if(val.isEmpty){
-                               ficheAdresse = fadresse;
-                               print(fadresse);
-                             }
-                           },
+                           controller: ficheAdresse,
                            decoration: InputDecoration(
                                hintText: fadresse != null ? '$fadresse' : 'adresse',
                                hintStyle: TextStyle(color: Colors.blueAccent),
@@ -315,12 +314,7 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (val){
-                             ficheAllergie = val;
-                             if(ficheAllergie == null){
-                               ficheAllergie = fallergie;
-                             }
-                           },
+                           controller: ficheAllergie,
                            decoration: InputDecoration(
                                hintText: allergies != null ? '$allergies' : 'allergie',
                                hintStyle: TextStyle(color: Colors.blueAccent),
@@ -356,12 +350,7 @@ class _MaFicheState extends State<MaFiche> {
                          ),
 
                          TextFormField(
-                           onChanged: (val){
-                             ficheGroupe= val;
-                             if(ficheGroupe == null){
-                               ficheGroupe = groupes;
-                             }
-                           },
+                           controller: ficheGroupe,
                            decoration: InputDecoration(
                                hintText: groupes != null ? '$groupes' : 'groupe sanguin',
                                hintStyle: TextStyle(color: Colors.blueAccent),

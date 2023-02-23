@@ -14,6 +14,7 @@ var util;
 //longitude et latitude
 var lon ;
 var lat;
+var ad;
 
 //id entite
 var idE = 0;

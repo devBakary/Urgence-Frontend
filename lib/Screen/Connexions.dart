@@ -227,7 +227,7 @@ class _ConnexionsState extends State<Connexions> {
                 fontWeight: FontWeight.bold),
           ),
           content: Container(
-            height: 200,
+            height: 180,
             child: Column(
               children: [
                 const Text("Veuillez renseigner votre nom d'utilisateur "),
@@ -297,7 +297,7 @@ class _ConnexionsState extends State<Connexions> {
         builder: (context)=> AlertDialog(
           title: Center(child: Text("Redirection")),
           content: Container(
-            height: 120,
+            height: 125,
             child: Column(
               children:  [
                 const Text("Un mot de passe vous a été envoyé sur votre mail et "

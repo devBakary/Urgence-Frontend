@@ -42,10 +42,45 @@ class ContactServices{
   }
 
 
+  //===methode pour modifier le contact===========
+  static Future<bool> upContact(String nom, String prenom, String numero, String email,  String domicile, String lien, int id) async{
+    Map data = {
+      "nom": nom,
+      "prenom": prenom,
+      "numero": numero,
+      "email": email,
+      "domicile": domicile,
+      "lien": lien
+    };
+
+    var body = jsonEncode(data);
+    print(body);
+    var url = Uri.parse(baseURL + "/contact/modifier/$id");
+
+    http.Response response = await http.put(url,
+        headers: headers,
+        body: body
+    );
+    if(response.statusCode == 200){
+      print(response.statusCode);
+      print(response.body);
+      Map responseMap = jsonDecode(response.body);
+
+      Contact contact = Contact.fromMap(responseMap);
+      return true;
+    }
+    else{
+      print(response.statusCode);
+      throw('une erreur s\'est produit');
+    }
+
+
+  }
+
+
+
+
   //==================== Pour l'authentification = ================
-
-  // ...
-
   Future<bool> login(String username, String password) async {
     Map data = {'username': username, 'password': password};
       var body = jsonEncode(data);
@@ -73,17 +108,19 @@ class ContactServices{
 
 
   //====== methode pour ajouter des contact de l'utilisateur
-   Future<bool> inscriprtion(String username, String numero, String adresse, String password) async{
+   Future<bool> inscriprtion(String username, String numero, String email, String adresse, String password) async{
    //on mappe les données
     Map data = {
       "username": username,
       "numero": numero,
+      "email": email!,
       "adresse": adresse,
       "password": password,
     };
     
     //puis une variable qui va contenir nos données
     var body = json.encode(data);
+    print(body);
     
     //on va declarer notre chemin de requette
     var url = Uri.parse(baseURL + '/auth/inscription');
@@ -108,10 +145,11 @@ class ContactServices{
   }
 
 //======== methode pour envoyer la localisation=========
-  static Future<Localisation> location(double longitude, double latitude, int iduser, int id) async{
+  static Future<Localisation> location(double longitude, double latitude, String adresse, int iduser, int id) async{
     Map data = {
       "longitude" : longitude,
-      "latitude" : latitude
+      "latitude" : latitude,
+      "adresse" : adresse
     };
      
     var body = jsonEncode(data);
@@ -121,9 +159,12 @@ class ContactServices{
                                       headers: headers,
                                       body: body);
 
-    Map responseMap = json.decode(response.body);
-    Localisation localisation = Localisation.fromMap(responseMap);
-    return localisation;
+    print(response.statusCode == 200);
+      Map responseMap = json.decode(response.body);
+      Localisation localisation = Localisation.fromMap(responseMap);
+      return localisation;
+
+
 
     
   }

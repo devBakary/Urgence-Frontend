@@ -19,7 +19,7 @@ class FichesServices{
   }
 
   // ===== methode pour l'ajout des contact de l'utilisateur =========================
-  static Future<Fiche> addFiche(String nom, String prenom, String allergie, String groupe, String adresse, int id) async{
+  static Future<bool> addFiche(String nom, String prenom, String allergie, String groupe, String adresse, int id) async{
     Map data = {
       "nom": nom,
       "prenom": prenom,
@@ -29,16 +29,26 @@ class FichesServices{
     };
 
     var body = jsonEncode(data);
+    print(body);
     var url = Uri.parse(baseURL + "/fiche/modifier/$id");
 
     http.Response response = await http.put(url,
         headers: headers,
         body: body
     );
-    Map responseMap = jsonDecode(response.body);
+    if(response.statusCode == 200){
+      print(response.statusCode);
+      print(response.body);
+      Map responseMap = jsonDecode(response.body);
 
-    Fiche fiche = Fiche.fromMap(responseMap);
-    return fiche;
+      Fiche fiche = Fiche.fromMap(responseMap);
+      return true;
+    }
+    else{
+      throw('une erreur');
+    }
+
+
   }
 
   static Future<List<Fiche>> getfiche(int id) async{

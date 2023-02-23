@@ -22,6 +22,7 @@ class _InscriptionsState extends State<Inscriptions> {
   TextEditingController userNumero= TextEditingController();
   TextEditingController userAdresse= TextEditingController();
   TextEditingController userPassword = TextEditingController();
+  TextEditingController userEmail = TextEditingController()!;
   ContactServices contactServices = ContactServices();
 
   recharge(){
@@ -145,6 +146,27 @@ class _InscriptionsState extends State<Inscriptions> {
                                   ),
                                   SizedBox(height: MediaQuery.of(context).size.height * .02,),
 
+                                  //email
+                                  TextFormField(
+                                    controller: userEmail,
+
+                                    decoration: InputDecoration(
+                                        labelText: 'Email ',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        filled: true,
+                                        fillColor: Color(0xFFe7edeb),
+                                        hintText: 'bak@gmail.com',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 18
+                                        ),
+                                        prefixIcon: Icon(CupertinoIcons.mail, color: Colors.blueGrey, size: 30,)
+                                    ),
+                                  ),
+                                  SizedBox(height: MediaQuery.of(context).size.height * .02,),
+
                                   //adresse
                                   TextFormField(
                                     controller: userAdresse,
@@ -218,9 +240,9 @@ class _InscriptionsState extends State<Inscriptions> {
                                 onPressed: () async {
                                     if(formkey.currentState!.validate()) {
                                       try {
-                                        if (await contactServices.inscriprtion(userUsername.text, userNumero.text, userAdresse.text, userPassword.text)) {
+                                        if (await contactServices.inscriprtion(userUsername.text, userNumero.text, userEmail.text!, userAdresse.text, userPassword.text)) {
                                           //Navigator.pop(context);
-                                          userUsername.text = '';
+                                          userUsername.text = " ";
                                           userNumero.text = '';
                                           userAdresse.text = '';
                                           userPassword.text = '';
@@ -252,6 +274,7 @@ class _InscriptionsState extends State<Inscriptions> {
 
                                           ));
                                           // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Accueil()));
+
                                         }
 
                                       } catch (e) {

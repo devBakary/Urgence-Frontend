@@ -22,7 +22,7 @@ class Contact{
         id: contactMap['id'],
         nom: contactMap['nom'],
         prenom: contactMap['prenom'],
-        email: contactMap['eamil'],
+        email: contactMap['email'],
         numero: contactMap['numero'],
         domicile: contactMap['domicile'],
         lien: contactMap['lien']

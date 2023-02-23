@@ -35,10 +35,10 @@ class EntiteAffichage extends StatefulWidget {
 
 class _EntiteAffichageState extends State<EntiteAffichage> {
 
-  var Longitude;
-  var Latitude;
+
   String locLongitude = "";
   String  locLatitude = "";
+  String locAdresse = "";
 
   final _player = AudioPlayer();
 
@@ -81,22 +81,28 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
 
     //print(placemark);
     Placemark place = placemark[0];
+    print(place);
+    print(place.country);
+    print(place.locality);
+    print(place.thoroughfare);
+    print(place.name);
+    print(place.street);
+
+
   }
 
   localisation() async{
     Position position = await _determinePosition();
+    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+
+    //print(placemark);
+    Placemark place = placemark[0];
 
     lon = position.longitude;
     lat = position.latitude ;
+    ad = place.country;
 
-    print(lon);
-    print(Latitude);
     GetAdresseFromLonLat(position);
-    /*final prefs=await SharedPreferences.getInstance();
-    await prefs.setInt('Longitude',Longitude as int);
-    await prefs.setInt('Latitude',Latitude);
-    final value=prefs.getInt('locLongitude');
-    final value1=prefs.getInt('locLatitude');*/
     setState(() {
       GetAdresseFromLonLat(position);
     });
@@ -106,6 +112,9 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
   void initState(){
     super.initState();
     localisation();
+    setState(() {
+
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -173,7 +182,7 @@ class _EntiteAffichageState extends State<EntiteAffichage> {
                                 IconButton(
                                   icon: const Icon(Icons.add_alert, color: Colors.red,),
                                   onPressed: (){
-                                    Provider.of<ContactData>(context, listen: false).adresse(lon, lat, usID, idE);
+                                    Provider.of<ContactData>(context, listen: false).adresse(lon, lat, ad, usID, idE);
                                       Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Accueil()));
 
                                   },

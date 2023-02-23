@@ -39,13 +39,13 @@ class ContactData extends ChangeNotifier{
   }*/
 
   //la methode pour s'inscrire
-  void addFiche(String ficheNom, String fichePrenom, String ficheAllergie, String ficheGroupe, String ficheAdresse, int idl) async {
+ /* void addFiche(String ficheNom, String fichePrenom, String ficheAllergie, String ficheGroupe, String ficheAdresse, int idl) async {
 
     Fiche fiche = await FichesServices.addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
 
     fiches.add(fiche);
     notifyListeners();
-  }
+  }*/
 
 
   //la methode pour supprimer un client
@@ -65,9 +65,9 @@ class ContactData extends ChangeNotifier{
 
   List<Localisation> localisations = [];
 
-  void adresse(double locLongitude, double locLatitude, int user, int id) async{
+  void adresse(double locLongitude, double locLatitude, String locAdresse, int user, int id) async{
 
-    Localisation localisation = await ContactServices.location(locLongitude, locLatitude, user, id);
+    Localisation localisation = await ContactServices.location(locLongitude, locLatitude, locAdresse, user, id);
     localisations.add(localisation);
     notifyListeners();
   }

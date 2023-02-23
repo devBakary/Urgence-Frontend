@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:urgence_projet/Service/UserService.dart';
 import 'package:urgence_projet/global.dart';
 
@@ -27,9 +28,14 @@ class _ReenitialisationState extends State<Reenitialisation> {
         child: Column(
           children: [
             Container(
-              height: 200,
-              color: Colors.amber,
-              child: ,
+              margin: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.all(10),
+              height: 250,
+              width: double.infinity,
+              //color: Colors.amber,
+              child: Center(
+                  child: Lottie.asset('assets/images/setting.json')
+              ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * .08,),
 
@@ -37,10 +43,11 @@ class _ReenitialisationState extends State<Reenitialisation> {
             Form(
               key: formkey,
               child: Container(
-
-                width: MediaQuery.of(context).size.width * .9,
+                padding: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width * .99,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
+                  color: Colors.red
                 ),
                 child: Column(
                   children: [

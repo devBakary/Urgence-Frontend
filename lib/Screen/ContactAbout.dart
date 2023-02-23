@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Screen/ContactUrgent.dart';
 import 'package:urgence_projet/Screen/Mes contacts.dart';
+import 'package:urgence_projet/Service/ContactService.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../global.dart';
 
 Future<void> makeCall(String url) async{
   if(await canLaunch(url)){
@@ -17,6 +20,7 @@ Future<void> makeCall(String url) async{
 class ContactAbout extends StatefulWidget {
   const ContactAbout({Key? key, required this.contact}) : super(key: key);
 
+
   final Contact contact;
 
   @override
@@ -24,6 +28,14 @@ class ContactAbout extends StatefulWidget {
 }
 
 class _ContactAboutState extends State<ContactAbout> {
+
+  TextEditingController nom = TextEditingController();
+  TextEditingController prenom = TextEditingController();
+  TextEditingController numero = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController adresse = TextEditingController();
+  TextEditingController lien = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -52,6 +64,38 @@ class _ContactAboutState extends State<ContactAbout> {
              actions: <Widget>[
                // Premier bouton
                InkWell(
+                 onDoubleTap: () async {
+                   print(widget.contact.id);
+                   await ContactServices.upContact(nom.text, prenom.text, numero.text, email.text, adresse.text, lien.text, widget.contact.id);
+                   print('ookk');
+
+                   ScaffoldMessenger.of(context)
+                       .showSnackBar(
+                       SnackBar(
+                         duration: Duration(seconds: 5),
+                         behavior: SnackBarBehavior.floating,
+                         backgroundColor: Colors.transparent,
+                         elevation: 0,
+                         content: Container(
+                             padding: EdgeInsets.all(15),
+                             height: 80,
+                             decoration: BoxDecoration(
+                               color: Colors.green,
+                               borderRadius: BorderRadius
+                                   .circular(20),
+                             ),
+                             child: const Center(
+                                 child: Text('Votre compte a été créé avec succes !',
+                                   textAlign: TextAlign
+                                       .center,
+                                   style: TextStyle(
+                                       fontSize: 16),
+                                 )
+                             )
+                         ),
+
+                       ));
+                 },
                  child:  Container(
 
                      padding: const EdgeInsets.only( top: 15, right: 20),
@@ -177,7 +221,7 @@ class _ContactAboutState extends State<ContactAbout> {
 
                                       child: InkWell(
                                         onTap: (){
-                                          widget.contact.email != null? makeCall('mailto:223${widget.contact.email}') : null;
+                                          widget.contact.email != null? makeCall('mailto:223${widget.contact.email}') : "pas d'email valide!";
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
@@ -233,6 +277,7 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: numero,
                       decoration:  InputDecoration(
                           hintText: '${widget.contact.numero}',
                           hintStyle: TextStyle(color: Colors.blueAccent),
@@ -267,6 +312,7 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: nom,
                       decoration:  InputDecoration(
                           hintText: widget.contact.nom,
                           hintStyle: const TextStyle(color: Colors.blueAccent),
@@ -301,6 +347,7 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: prenom,
                       decoration:  InputDecoration(
                           hintText: widget.contact.prenom,
                           hintStyle: TextStyle(color: Colors.blueAccent),
@@ -335,8 +382,9 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: email,
                       decoration:  InputDecoration(
-                          hintText: widget.contact.email != null ? widget.contact.email : "email",
+                          hintText: '${widget.contact.email}',
                           hintStyle: TextStyle(color: Colors.blueAccent),
                           border: InputBorder.none
                       ),
@@ -369,6 +417,7 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: adresse,
                       decoration:  InputDecoration(
                           hintText:  widget.contact.domicile != null ? widget.contact.domicile : "domicile",
                           hintStyle: const TextStyle(color: Colors.blueAccent),
@@ -403,6 +452,7 @@ class _ContactAboutState extends State<ContactAbout> {
                     ),
 
                     TextFormField(
+                      controller: lien,
                       decoration:  InputDecoration(
                           hintText:  widget.contact.lien != null ? widget.contact.lien : "lien de parenté",
                           hintStyle: const TextStyle(color: Colors.blueAccent),
@@ -428,7 +478,9 @@ class _ContactAboutState extends State<ContactAbout> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFDEE3E8),
                   ),
-                  onPressed: () {  },
+                  onPressed: () async{
+                   await ContactServices.deleteContact(widget.contact.id);
+                  },
                   child: const Text("Supprimer", style: TextStyle(color: Colors.red, fontSize: 20),),
                 ),
 
