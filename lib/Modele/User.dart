@@ -5,9 +5,10 @@ class Users{
   final String? adresse;
   final int numero;
   final String password;
+  final String? img;
 
   Users(
-    this.id, this.username, this.email, this.adresse, this.numero, this.password
+    this.id, this.username, this.email, this.adresse, this.numero, this.password, this.img
  );
 
 
@@ -18,7 +19,8 @@ class Users{
         userMap['email'],
         userMap['adresse'],
         userMap['numero'],
-        userMap['password']
+        userMap['password'],
+        userMap['img']
     );
   }
 

@@ -35,16 +35,23 @@ class _VideoPlayersState extends State<VideoPlayers> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 300,
-        width: MediaQuery.of(context).size.width * .90,
+    return _chewieController == null?
+    const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    )
+
+      :Container(
+        //height: 300,
+        width: MediaQuery.of(context).size.width * .99,
         child: _chewieVideoPlayer());
   }
 
   Widget _chewieVideoPlayer(){
     return Container(
       height: 300,
-      width: MediaQuery.of(context).size.width * .90,
+      //width: MediaQuery.of(context).size.width * .90,
       child: Chewie(
         controller: _chewieController!,
       ),

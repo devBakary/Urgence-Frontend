@@ -6,6 +6,7 @@ int usID = 0;
 
 //le username
 var usernames;
+var MYusernames;
 
 var usern;
 var util;

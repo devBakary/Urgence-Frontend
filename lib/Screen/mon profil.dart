@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
 import 'package:urgence_projet/Screen/Connexions.dart';
+import 'package:urgence_projet/Screen/profil/Parametre.dart';
 import 'package:urgence_projet/Service/UserService.dart';
 import 'package:urgence_projet/global.dart';
 
@@ -58,7 +59,14 @@ class _ProfilPageState extends State<ProfilPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return uUsername == null?
+    const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    )
+
+      :Scaffold(
       body: Column(
         children: [
           Container(
@@ -95,7 +103,7 @@ class _ProfilPageState extends State<ProfilPage> {
                         IconButton(
                           alignment: AlignmentDirectional.topEnd,
                             onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (_)=>Reenitialisation()));
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>updateUser()));
                             },
                             icon: Icon(Icons.settings, color: Colors.white, size: 32,),
                         ),

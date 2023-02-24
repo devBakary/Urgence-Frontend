@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urgence_projet/Screen/Appel.dart';
 import 'package:urgence_projet/Screen/MaFiche.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/mon%20profil.dart';
 
+import '../Modele/Contact_data.dart';
+import '../Modele/User.dart';
 import '../Screen/About.dart';
 import '../Screen/Accueil.dart';
 import '../Screen/Connexions.dart';
 import '../Screen/Geste de secours.dart';
 import '../Screen/Mes contacts.dart';
+import '../Service/UserService.dart';
 import '../global.dart';
 import 'drawer item.dart';
 
@@ -22,6 +27,32 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   bool _isSelected = true;
+  List<Users>? users;
+
+  var uUsername;
+
+  Future init() async {
+    final prefs = await SharedPreferences.getInstance();
+    uUsername = prefs.getString('username')!;
+    setState(() {
+
+    });
+  }
+
+  getUser() async{
+    users = await UserService.getContact(usID);
+    Provider.of<ContactData>(context, listen: false).users = users!;
+    init();
+    setState(() { });
+  }
+
+  var us = usernames;
+  @override
+  void initState(){
+    super.initState();
+    getUser();
+    setState(() { });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +68,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: Column(
           children: [
             headerWidget(),
-            Row(
+           /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:  [
                 const Padding(
@@ -64,7 +95,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       icon:  Icon(_isSelected? Icons.toggle_off_outlined : Icons.toggle_on_rounded, color: Colors.green, size: 50,)),
                 )
               ],
-            ),
+            ),*/
             const Divider(
               color: Colors.black,
               thickness: 2,
@@ -181,7 +212,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Widget headerWidget(){
-    return InkWell(
+
+    return uUsername == null?
+    Container(
+      //height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    )
+
+      :InkWell(
       onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfilPage())),
       child: Container(
         padding: EdgeInsets.all(10),
@@ -199,7 +239,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
             ),
             const SizedBox(width: 20,),
-             Text('${usernames}', style: TextStyle(fontSize: 24, color: Colors.white),),
+             Text(uUsername,
+               style: TextStyle(fontSize: 24, color: Colors.white),),
           ],
         ),
       ),

@@ -50,32 +50,34 @@ class Aide extends StatelessWidget {
                   ),
 
 
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15, left: 15),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15, left: 15),
 
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 40),
-                          padding: EdgeInsets.all(10),
-                          height: MediaQuery.of(context).size.height * .18,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: const Text(
-                            "Nous vous proposons de suivre ces tutoriels bien expliqués en langue nationaale pour vous "
-                                "aider au mieux a utiliser application",
-                            style: TextStyle(
-                                fontSize: 20
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 40),
+                            padding: EdgeInsets.all(10),
+                            height: MediaQuery.of(context).size.height * .18,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: const Text(
+                              "Nous vous proposons de suivre ces tutoriels bien expliqués en langue nationaale pour vous "
+                                  "aider au mieux a utiliser application",
+                              style: TextStyle(
+                                  fontSize: 20
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 20,),
-                      VideoPlayers(),
+                        SizedBox(height: 20,),
+                        VideoPlayers(),
 
-                    ],
+                      ],
+                    ),
                   ),
                 )
             ),
