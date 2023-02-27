@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
-import 'package:urgence_projet/Screen/PageAide.dart';
 import 'package:urgence_projet/Screen/SplashScreen.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/About.dart';
 import 'package:urgence_projet/Screen/Accueil.dart';
-import 'package:urgence_projet/Screen/test.dart';
+import 'package:urgence_projet/Screen/Mes contacts.dart';
 
 import '../Service/ContactService.dart';
 import 'ContactUrgent.dart';
@@ -60,7 +60,7 @@ class _InscriptionState extends State<Inscription> {
                   const SizedBox(height: 10,),
                    TextField(
                      controller: passwordController,
-                    decoration: const InputDecoration(
+                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'password',
                     ),

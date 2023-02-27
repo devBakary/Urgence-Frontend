@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Entite.dart';
 import 'package:urgence_projet/Service/ContactService.dart';
+import 'package:urgence_projet/Service/FicheService.dart';
 
+import 'Fiche.dart';
 import 'User.dart';
+import 'mes gestes.dart';
 
 //le management avec le provider
 class ContactData extends ChangeNotifier{
@@ -15,24 +18,34 @@ class ContactData extends ChangeNotifier{
 
   List<Users> users = [];
 
+  List<Geste> gestes = [];
+
+  //detail geste
+  List<Geste> dgestes = [];
+
+  List<Fiche> fiches = [];
+
 
   //la methode pour ajouter un contact
-  void addContact(String contactNom, String contactPrenom, String contactEmail, String contactNumero, String contactAdresse) async{
 
-    Contact contact = await ContactServices.addContact(contactNom, contactPrenom, contactEmail, contactNumero, contactAdresse);
-
-    contacts.add(contact);
-    notifyListeners();
-  }
 
   //la methode pour s'inscrire
-  void inscriptionUser(String userUsername, String userEmail, String userNumero, String userAdresse, String userPassword) async {
+   /*inscriptionUser(String userUsername, String userNumero, String userAdresse, String userPassword) async {
 
-    Users user = await ContactServices.inscriprtion(userUsername, userEmail, userNumero, userAdresse, userPassword);
+    Users user = await ContactServices.inscriprtion(userUsername, userNumero, userAdresse, userPassword);
 
     users.add(user);
     notifyListeners();
-  }
+  }*/
+
+  //la methode pour s'inscrire
+ /* void addFiche(String ficheNom, String fichePrenom, String ficheAllergie, String ficheGroupe, String ficheAdresse, int idl) async {
+
+    Fiche fiche = await FichesServices.addFiche(ficheNom, fichePrenom, ficheAllergie, ficheGroupe, ficheAdresse, idl);
+
+    fiches.add(fiche);
+    notifyListeners();
+  }*/
 
 
   //la methode pour supprimer un client
@@ -52,9 +65,9 @@ class ContactData extends ChangeNotifier{
 
   List<Localisation> localisations = [];
 
-  void adresse(String locLongitude, String locLatitude) async{
+  void adresse(double locLongitude, double locLatitude, String locAdresse, int user, int id) async{
 
-    Localisation localisation = await ContactServices.location(locLongitude, locLatitude);
+    Localisation localisation = await ContactServices.location(locLongitude, locLatitude, locAdresse, user, id);
     localisations.add(localisation);
     notifyListeners();
   }

@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:urgence_projet/Modele/Contact.dart';
 import 'package:urgence_projet/Modele/Contact_data.dart';
 import 'package:urgence_projet/Screen/ContactAbout.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+Future<void> makeCall(String url) async{
+  if(await canLaunch(url)){
+    await launch(url);
+  }
+  else{
+    throw "Nous ne pouvons pas lancer l'appel sur $url";
+  }
+}
 
 class ContactTile extends StatelessWidget {
   final Contact contact;
@@ -29,7 +39,7 @@ class ContactTile extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) =>
-                          ContactAbout()));
+                          ContactAbout(contact: contact,)));
                 },
                 child: Container(
 
@@ -48,7 +58,7 @@ class ContactTile extends StatelessWidget {
                     child: Row(
 
                       children: [
-                        Text(contact.prenom + " " + contact.nom, style: TextStyle(
+                        Text(contact.prenom + " " + contact.nom, style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold),),
                         //SizedBox(width: MediaQuery.of(context).size.width * .13,),
@@ -60,7 +70,9 @@ class ContactTile extends StatelessWidget {
                               IconButton(
                                 icon: Icon(
                                   Icons.call, color: Colors.red,),
-                                onPressed: () {},
+                                onPressed: () {
+                                  makeCall('tel:223${contact.numero}');
+                                },
                               ),
                             ],
                           ),
