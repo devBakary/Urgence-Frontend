@@ -379,7 +379,7 @@ class _ContactAboutState extends State<ContactAbout> {
                 //padding: EdgeInsets.all(8),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFDEE3E8),
+                   // backgroundColor: Color(0xFFDEE3E8),
                   ),
                   onPressed: () {  },
                   child: const Text("Supprimer", style: TextStyle(color: Colors.red, fontSize: 20),),
