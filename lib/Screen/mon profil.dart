@@ -75,31 +75,7 @@ class _ProfilPageState extends State<ProfilPage> {
     )
 
       :Scaffold(
-      appBar: AppBar(
-        actions:[
-          PopupMenuButton<MenuItem>(
-              onSelected: (value){
-                if(value == MenuItem.update){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>updateUser()));
-                }
-                else if(value == MenuItem.pass){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>Reenitialisation()));
-                }
-              },
-              itemBuilder: (context) =>[
-            const PopupMenuItem(
-              value: MenuItem.update,
-                child: Text("Modifier votre compte")
-                ),
-            const PopupMenuItem(
-              value: MenuItem.pass,
-                child: Text("Modifier votre mot de passe")
-            ),
-
-          ])
-        ]
-      ),
-      body: Column(
+          body: Column(
         children: [
           Container(
             height: MediaQuery.of(context).size.height * .40,
@@ -132,13 +108,27 @@ class _ProfilPageState extends State<ProfilPage> {
                           ),
                         ),
 
-                        IconButton(
-                          alignment: AlignmentDirectional.topEnd,
-                            onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (_)=>updateUser()));
+                        PopupMenuButton<MenuItem>(
+                          icon: Icon(Icons.settings, color: Colors.white, size: 32,),
+                            onSelected: (value){
+                              if(value == MenuItem.update){
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>updateUser()));
+                              }
+                              else if(value == MenuItem.pass){
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Reenitialisation()));
+                              }
                             },
-                            icon: Icon(Icons.settings, color: Colors.white, size: 32,),
-                        ),
+                            itemBuilder: (context) =>[
+                              const PopupMenuItem(
+                                  value: MenuItem.update,
+                                  child: Text("Modifier votre compte")
+                              ),
+                              const PopupMenuItem(
+                                  value: MenuItem.pass,
+                                  child: Text("Modifier votre mot de passe")
+                              ),
+
+                            ]),
 
                       ],
                     ),
@@ -155,7 +145,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 SizedBox(height: 10,),
                  Text( '${uUsername}',
                     style: TextStyle(fontSize: 28),)
-                
+
               ],
             ),
           ),

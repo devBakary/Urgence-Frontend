@@ -1,6 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgence_projet/Screen/PageAide.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+//pour passer l'appel
+Future<void> makeCall(String url) async{
+  if(await canLaunch(url)){
+    await launch(url);
+  }
+  else{
+    throw "Nous ne pouvons pas lancer l'appel sur $url";
+  }
+}
 
 class Apropos extends StatelessWidget {
   const Apropos({Key? key}) : super(key: key);
@@ -77,7 +88,7 @@ class Apropos extends StatelessWidget {
 
                                   child: InkWell(
                                     onTap: (){
-
+                                      makeCall('tel:22390675432');
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(5),
@@ -103,7 +114,7 @@ class Apropos extends StatelessWidget {
 
                                   child: InkWell(
                                     onTap: (){
-
+                                      makeCall('sms:22390675432');
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(5),
@@ -130,7 +141,7 @@ class Apropos extends StatelessWidget {
 
                                   child: InkWell(
                                     onTap: (){
-
+                                      makeCall('mailto:bakdia194@gmail.com');
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(5),
